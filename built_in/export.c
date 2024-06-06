@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:30:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 02:44:34 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/06 22:26:46 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	export_split_key_value(char *data, char **key, char **value)
 	while (data[i] && data[i] != '=')
 		i++;
 	*key = ft_substr(data, 0, i);
-	if (len - i > 0)
+	if (len - i)
 		*value = ft_substr(data, i + 1, len - i);
 	else
 		*value = NULL;
@@ -92,9 +92,10 @@ void	export(int argc, char **argv, char **envp, t_list *env_list)
 	char	*key;
 	char	*value;
 
+	i = 0;
 	if (!argv[1])
 		export_no_argv(env_list);
-	while (argv[i])
+	while (argv[++i])
 	{
 		key = NULL;
 		value = NULL;
@@ -105,6 +106,5 @@ void	export(int argc, char **argv, char **envp, t_list *env_list)
 			add_env(&env_list, key, value);
 		free(key);
 		free(value);
-		i++;
 	}
 }

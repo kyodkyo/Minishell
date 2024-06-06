@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:42:17 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 01:43:30 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/06 21:55:08 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ t_env	*ft_envnew(void)
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	if (s1 == NULL && s2 == NULL)
+	if (!s1 && !s2)
 		return (0);
-	else if (s1 == NULL)
+	else if (!s1)
 		return (ft_strlen(s2) * -1);
-	else if (s2 == NULL)
+	else if (!s2)
 		return (ft_strlen(s1));
 	while (*s1 && *s2)
 	{

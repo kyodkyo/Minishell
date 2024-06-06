@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:45:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 01:46:51 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/06 22:14:12 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	update_env(t_env *env, char *key, char *value)
 	if (!data)
 		error();
 	env->data = data;
-	env->key = key;
+	env->key = ft_strdup(key);
 	if (value)
-		env->value = value;
+		env->value = ft_strdup(value);
 }
 
 void	add_new_env(t_list **env_list, char *key, char *value)
@@ -67,7 +67,7 @@ void	add_env(t_list **env_list, char *key, char *value)
 	new_env = find_by_key(*env_list, key);
 	if (!new_env)
 		add_new_env(env_list, key, value);
-	else if (new_env && value)
+	else if (value)
 	{
 		free(new_env->data);
 		free(new_env->key);

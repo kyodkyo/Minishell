@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:27:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/15 06:25:49 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/18 14:42:41 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "builtin.h"
 
 int	built_in(int argc, char **argv, char **envp)
 {

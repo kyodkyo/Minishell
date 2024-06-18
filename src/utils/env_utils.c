@@ -1,16 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export2.c                                          :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 01:45:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/15 06:24:40 by dakyo            ###   ########.fr       */
+/*   Created: 2024/06/18 14:24:15 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/18 14:57:40 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "utils.h"
+
+char	*get_next_key(t_list *env_list, char *prev)
+{
+	char	*result;
+
+	result = NULL;
+	while (env_list)
+	{
+		if (!result && cmp_str(prev, ((t_env *)env_list->content)->key) < 0)
+			result = ((t_env *)env_list->content)->key;
+		else
+		{
+			if (cmp_str(prev, ((t_env *)env_list->content)->key) < 0
+				&& cmp_str(result, ((t_env *)env_list->content)->key) > 0)
+				result = ((t_env *)env_list->content)->key;
+		}
+		env_list = env_list->next;
+	}
+	return (result);
+}
 
 void	update_env(t_env *env, char *key, char *value)
 {

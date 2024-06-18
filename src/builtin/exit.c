@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:29:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 01:39:31 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/18 14:25:00 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "builtin.h"
 
 void	built_in_exit(int argc, char **argv, char **envp)
 {

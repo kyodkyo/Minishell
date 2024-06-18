@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:29:13 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 02:40:39 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/18 14:24:56 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "builtin.h"
 
 void	env(int argc, char **argv, char **envp, t_list *env_list)
 {

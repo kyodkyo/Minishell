@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:32:56 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 22:08:47 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/15 06:10:06 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	unset_env(t_list **env_list, char *target_key)
 	list = NULL;
 	while (cur)
 	{
-		if (ft_strcmp(((t_env *)(cur->content))->key, target_key) == 0)
+		if (cmp_str(((t_env *)(cur->content))->key, target_key) == 0)
 		{
 			remove_key_value(env_list, list, cur);
 			break ;

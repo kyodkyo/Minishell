@@ -6,11 +6,24 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:42:17 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 21:55:08 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/15 06:26:14 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
+
+void	to_lowercase(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] += 32;
+		i++;
+	}
+}
 
 t_env	*ft_envnew(void)
 {
@@ -25,7 +38,7 @@ t_env	*ft_envnew(void)
 	return (new);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	cmp_str(char *s1, char *s2)
 {
 	if (!s1 && !s2)
 		return (0);
@@ -56,8 +69,8 @@ void	init_split_key_value(char *data, char **key, char **value)
 			break ;
 		i++;
 	}
-	*key = ft_substr(data, 0, i);
-	*value = ft_substr(data, i + 1, len - i);
+	*key = get_substring(data, 0, i);
+	*value = get_substring(data, i + 1, len - i);
 }
 
 t_list	*init_envp(char **envp)
@@ -72,14 +85,14 @@ t_list	*init_envp(char **envp)
 		env = ft_envnew();
 		if (!env)
 			error();
-		tmp = ft_lstnew(env);
+		tmp = make_new_node(env);
 		if (!tmp)
 			error();
-		env->data = ft_strdup(*envp);
+		env->data = dup_str(*envp);
 		if (!env->data)
 			error();
 		init_split_key_value(env->data, &(env->key), &(env->value));
-		ft_lstadd_back(&env_list, tmp);
+		list_add_back(&env_list, tmp);
 		envp++;
 	}
 	return (env_list);

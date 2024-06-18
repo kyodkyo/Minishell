@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:45:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 22:14:12 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/15 06:24:40 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ void	update_env(t_env *env, char *key, char *value)
 	char	*data;
 
 	if (!value)
-		data = ft_strdup(key);
+		data = dup_str(key);
 	else
 	{
-		data = ft_strjoin(ft_strdup(key), "=");
-		data = ft_strjoin(data, ft_strdup(value));
+		data = combine_str(dup_str(key), "=");
+		data = combine_str(data, dup_str(value));
 	}
 	if (!data)
 		error();
 	env->data = data;
-	env->key = ft_strdup(key);
+	env->key = dup_str(key);
 	if (value)
-		env->value = ft_strdup(value);
+		env->value = dup_str(value);
 }
 
 void	add_new_env(t_list **env_list, char *key, char *value)
@@ -39,11 +39,11 @@ void	add_new_env(t_list **env_list, char *key, char *value)
 	new_env = ft_envnew();
 	if (!new_env)
 		error();
-	tmp = ft_lstnew(new_env);
+	tmp = make_new_node(new_env);
 	if (!tmp)
 		error();
 	update_env(new_env, key, value);
-	ft_lstadd_back(env_list, tmp);
+	list_add_back(env_list, tmp);
 }
 
 t_env	*find_by_key(t_list *env_list, char *target_key)
@@ -53,7 +53,7 @@ t_env	*find_by_key(t_list *env_list, char *target_key)
 	list = env_list;
 	while (list)
 	{
-		if (ft_strcmp(((t_env *)list->content)->key, target_key) == 0)
+		if (cmp_str(((t_env *)list->content)->key, target_key) == 0)
 			return (list->content);
 		list = list->next;
 	}

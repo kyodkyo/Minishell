@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:30:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 22:26:46 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/15 06:26:14 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ char	*get_next_key(t_list *env_list, char *prev)
 	result = NULL;
 	while (env_list)
 	{
-		if (!result && ft_strcmp(prev, ((t_env *)env_list->content)->key) < 0)
+		if (!result && cmp_str(prev, ((t_env *)env_list->content)->key) < 0)
 			result = ((t_env *)env_list->content)->key;
 		else
 		{
-			if (ft_strcmp(prev, ((t_env *)env_list->content)->key) < 0
-				&& ft_strcmp(result, ((t_env *)env_list->content)->key) > 0)
+			if (cmp_str(prev, ((t_env *)env_list->content)->key) < 0
+				&& cmp_str(result, ((t_env *)env_list->content)->key) > 0)
 				result = ((t_env *)env_list->content)->key;
 		}
 		env_list = env_list->next;
@@ -58,7 +58,7 @@ void	export_no_argv(t_list *env_list)
 	char	*cur_key;
 
 	i = 0;
-	size = ft_lstsize(env_list);
+	size = count_list_size(env_list);
 	prev_key = NULL;
 	cur_key = NULL;
 	while (i < size)
@@ -79,9 +79,9 @@ void	export_split_key_value(char *data, char **key, char **value)
 	len = ft_strlen(data);
 	while (data[i] && data[i] != '=')
 		i++;
-	*key = ft_substr(data, 0, i);
+	*key = get_substring(data, 0, i);
 	if (len - i)
-		*value = ft_substr(data, i + 1, len - i);
+		*value = get_substring(data, i + 1, len - i);
 	else
 		*value = NULL;
 }

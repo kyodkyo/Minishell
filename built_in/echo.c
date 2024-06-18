@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:28:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/06 02:16:10 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/15 06:25:49 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	echo(int argc, char **argv, char **envp)
 
 	i = 1;
 	option = 0;
-	if (argc > 1 && ft_strncmp(argv[1], "-n", 2) == 0)
+	if (argc > 1 && compare_str(argv[1], "-n", 2) == 0)
 	{
 		i++;
 		option = 1;

@@ -6,11 +6,12 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:28:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:24:41 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:31:37 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "utils.h"
 
 void	echo(int argc, char **argv, char **envp)
 {

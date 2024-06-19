@@ -6,11 +6,12 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:27:57 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:24:36 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:31:22 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "utils.h"
 
 void	cd(int argc, char **argv, char **envp, t_list *env_list)
 {
@@ -27,5 +28,5 @@ void	cd(int argc, char **argv, char **envp, t_list *env_list)
 		path = argv[1];
 	res = chdir(path);
 	if (res == -1)
-		error();
+		printf("error\n");
 }

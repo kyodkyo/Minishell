@@ -6,14 +6,14 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 23:21:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:52:27 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:23:41 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
 
-# include "minishell.h"
+# include "./minishell.h"
 
 # define IN 1
 # define OUT 2
@@ -38,6 +38,7 @@ void	redir_out(t_redir *redir, t_io *io);
 void	redir_heredoc(t_redir *redir, t_io *io);
 void	redir_out_append(t_redir *redir, t_io *io);
 
+void	error(void);
 void	redirection(t_redir *redir);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/15 03:01:35 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:26:25 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	redir_in(t_redir *redir, t_io *io)
 
 	fd = open(redir->filename, O_RDONLY);
 	if (fd < 0)
-		error();
+		printf("error\n");
 	if (io->input_fd != STDIN_FILENO)
 		close(io->input_fd);
 	io->input_fd = fd;
@@ -30,7 +30,7 @@ void	redir_out(t_redir *redir, t_io *io)
 
 	fd = open(redir->filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
-		error();
+		printf("error\n");
 	if (io->output_fd != STDOUT_FILENO)
 		close(io->output_fd);
 	io->output_fd = fd;

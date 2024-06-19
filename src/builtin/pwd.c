@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:32:46 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:25:39 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:26:18 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	pwd(int argc, char **argv, char **envp)
 		write(1, "\n", 1);
 	}
 	else
-		error();
+		printf("error\n");
 }

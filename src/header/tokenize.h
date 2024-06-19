@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 13:26:42 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/15 06:37:00 by woonshin         ###   ########.fr       */
+/*   Created: 2024/06/19 17:56:21 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/19 17:56:58 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
-# include <stdlib.h>
-# include "token.h"
-# include "libft.h"
-# include <stdio.h>
 
-void tokenize(t_token **token_lst, char *line);
+# include "./minishell.h"
+# include "./token.h"
+
+void	tokenize(t_token **token_lst, char *line);
 
 // tokenize_dollar
-int	tokenize_expend(t_token *token_lst, t_token *token);
+int		tokenize_expend(t_token **token_lst, t_token *token);
 
 // token lst
 void	add_token(t_token **token_lst, t_token *token);
@@ -31,12 +29,11 @@ void	token_lst_free(t_token **token_lst);
 void	token_free(t_token *token);
 
 // utils
-int	is_quotation_str(char *str, int l, int r);
-int	is_delimiter(char c);
-int	ft_strcmp(const char *s1, char *s2);
-int	get_token_type(const char *str);
+int		is_quotation_str(char *str, int l, int r);
+int		is_delimiter(char c);
+int		ft_strcmp(const char *s1, char *s2);
+int		get_token_type(const char *str);
 
 // dollar 
-int	tokenize_expend(t_token **token_lst, t_token *token);
 
 #endif

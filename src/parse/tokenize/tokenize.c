@@ -3,30 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:19:17 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/15 06:37:19 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:02:47 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-
 void	tokenize(t_token **token_lst, char *line)
 {
-	int left = 0, right = 0;
-	int in_single_quote = 0, in_double_quote = 0;
+	int		left;
+	int		right;
+	int		in_single_quote;
+	int		in_double_quote;
 	t_token	*token;
 
+	left = 0;
+	right = 0;
+	in_single_quote = 0;
+	in_double_quote = 0;
 	while (right < (int)ft_strlen(line))
 	{
 		while (line[right] != '\0' && is_delimiter(line[right]))
 			right++;
 		left = right;
-
-		while (line[right] != '\0' && 
-			   (!is_delimiter(line[right]) || in_single_quote || in_double_quote))
+		while (line[right] != '\0'
+			&& (!is_delimiter(line[right])
+				|| in_single_quote || in_double_quote))
 		{
 			if (line[right] == '\'' && !in_double_quote)
 				in_single_quote = !in_single_quote;

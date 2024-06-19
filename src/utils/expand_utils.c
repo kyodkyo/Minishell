@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:33:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:51:20 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:16:04 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ char	*get_value(t_list *env_list, char *key)
 
 	env = find_by_key(env_list, key);
 	if (!env)
-		result = dup_str("");
+		result = ft_strdup("");
 	else
-		result = dup_str(env->value);
+		result = ft_strdup(env->value);
 	if (!result)
-		error();
+		printf("error\n");
 	return (result);
 }

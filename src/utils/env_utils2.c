@@ -5,55 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 14:30:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:51:19 by dakyo            ###   ########.fr       */
+/*   Created: 2024/06/18 14:54:19 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/19 17:57:39 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	to_lowercase(char *str)
+void	free_env_node(t_list **node)
 {
-	int	i;
+	t_env	*env;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-			str[i] += 32;
-		i++;
-	}
+	env = (t_env *)(*node)->content;
+	free(env->data);
+	free(env->key);
+	if (env->value)
+		free(env->value);
+	free(env);
+	free(*node);
+	*node = NULL;
 }
 
-t_env	*ft_envnew(void)
+void	remove_key_value(t_list **env_list, t_list *list, t_list *cur)
 {
-	t_env	*new;
-
-	new = (t_env *)malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
-	new->data = NULL;
-	new->key = NULL;
-	new->value = NULL;
-	return (new);
+	if (!list)
+		*env_list = cur->next;
+	else
+		list->next = cur->next;
+	free_env_node(&cur);
 }
 
-int	cmp_str(char *s1, char *s2)
+void	unset_env(t_list **env_list, char *target_key)
 {
-	if (!s1 && !s2)
-		return (0);
-	else if (!s1)
-		return (ft_strlen(s2) * -1);
-	else if (!s2)
-		return (ft_strlen(s1));
-	while (*s1 && *s2)
+	t_list	*cur;
+	t_list	*list;
+
+	cur = *env_list;
+	list = NULL;
+	while (cur)
 	{
-		if (*s1 != *s2)
+		if (cmp_str(((t_env *)(cur->content))->key, target_key) == 0)
+		{
+			remove_key_value(env_list, list, cur);
 			break ;
-		s1++;
-		s2++;
+		}
+		list = cur;
+		cur = cur->next;
 	}
-	return (*s1 - *s2);
 }
 
 void	init_split_key_value(char *data, char **key, char **value)
@@ -69,8 +67,8 @@ void	init_split_key_value(char *data, char **key, char **value)
 			break ;
 		i++;
 	}
-	*key = get_substring(data, 0, i);
-	*value = get_substring(data, i + 1, len - i);
+	*key = get_substr(data, 0, i);
+	*value = get_substr(data, i + 1, len - i);
 }
 
 t_list	*init_envp(char **envp)
@@ -84,15 +82,15 @@ t_list	*init_envp(char **envp)
 	{
 		env = ft_envnew();
 		if (!env)
-			error();
-		tmp = make_new_node(env);
+			printf("error\n");
+		tmp = ft_lstnew(env);
 		if (!tmp)
-			error();
-		env->data = dup_str(*envp);
+			printf("error\n");
+		env->data = ft_strdup(*envp);
 		if (!env->data)
-			error();
+			printf("error\n");
 		init_split_key_value(env->data, &(env->key), &(env->value));
-		list_add_back(&env_list, tmp);
+		ft_lstadd_back(&env_list, tmp);
 		envp++;
 	}
 	return (env_list);

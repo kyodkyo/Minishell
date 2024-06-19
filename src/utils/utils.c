@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_built_in2.c                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/15 06:15:31 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:51:23 by dakyo            ###   ########.fr       */
+/*   Created: 2024/06/15 06:13:46 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/19 17:53:08 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-char	*dup_str(const char *s1)
+void	*str_join_len(void *dst, const void *src, size_t len)
 {
-	int		i;
-	int		len;
-	char	*res;
+	size_t	index;
 
-	i = 0;
-	len = ft_strlen(s1);
-	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (NULL);
-	while (i < len)
+	index = 0;
+	if (!dst && !src)
+		return (dst);
+	while (index < len)
 	{
-		res[i] = ((char *)s1)[i];
-		i++;
+		((unsigned char *)dst)[index] = ((unsigned char *)src)[index];
+		index++;
 	}
-	res[i] = '\0';
-	return (res);
+	return (dst);
 }
 
 char	*combine_str(char const *s1, char const *s2)
@@ -42,10 +37,10 @@ char	*combine_str(char const *s1, char const *s2)
 		return (0);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	res = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	res = ft_calloc(s1_len + s2_len + 1, sizeof(char));
 	if (res == NULL)
 		return (NULL);
-	join_str(res, s1, s1_len);
+	str_join_len(res, s1, s1_len);
 	copy_str_len(res + s1_len, s2, s2_len + 1);
 	return (res);
 }
@@ -85,13 +80,13 @@ int	compare_str(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-char	*get_substring(char const *s, unsigned int start, size_t len)
+char	*get_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*res;
 
 	if (!s || !len || (unsigned int)ft_strlen(s) <= start)
-		return (dup_str(""));
-	res = (char *)malloc(sizeof(char) * (len + 1));
+		return (ft_strdup(""));
+	res = ft_calloc(len + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	copy_str_len(res, &s[start], len + 1);

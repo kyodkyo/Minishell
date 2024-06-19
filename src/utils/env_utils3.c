@@ -5,52 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 14:54:19 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:54:44 by dakyo            ###   ########.fr       */
+/*   Created: 2024/06/18 14:30:26 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/19 17:54:00 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	free_env_node(t_list **node)
+void	to_lowercase(char *str)
 {
-	t_env	*env;
+	int	i;
 
-	env = (t_env *)(*node)->content;
-	free(env->data);
-	free(env->key);
-	if (env->value)
-		free(env->value);
-	free(env);
-	free(*node);
-	*node = NULL;
-}
-
-void	remove_key_value(t_list **env_list, t_list *list, t_list *cur)
-{
-	if (!list)
-		*env_list = cur->next;
-	else
-		list->next = cur->next;
-	free_env_node(&cur);
-}
-
-void	unset_env(t_list **env_list, char *target_key)
-{
-	t_list	*cur;
-	t_list	*list;
-
-	cur = *env_list;
-	list = NULL;
-	while (cur)
+	i = 0;
+	while (str[i])
 	{
-		if (cmp_str(((t_env *)(cur->content))->key, target_key) == 0)
-		{
-			remove_key_value(env_list, list, cur);
-			break ;
-		}
-		list = cur;
-		cur = cur->next;
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] += 32;
+		i++;
 	}
 }
 
@@ -69,4 +40,35 @@ int	is_valid_key(char *key)
 			return (1);
 	}
 	return (0);
+}
+
+t_env	*ft_envnew(void)
+{
+	t_env	*new;
+
+	new = ft_calloc(1, sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->data = NULL;
+	new->key = NULL;
+	new->value = NULL;
+	return (new);
+}
+
+int	cmp_str(char *s1, char *s2)
+{
+	if (!s1 && !s2)
+		return (0);
+	else if (!s1)
+		return (ft_strlen(s2) * -1);
+	else if (!s2)
+		return (ft_strlen(s1));
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			break ;
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }

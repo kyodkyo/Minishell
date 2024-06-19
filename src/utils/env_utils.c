@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:24:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/18 14:57:40 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:30:06 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,6 @@ char	*get_next_key(t_list *env_list, char *prev)
 	return (result);
 }
 
-void	update_env(t_env *env, char *key, char *value)
-{
-	char	*data;
-
-	if (!value)
-		data = dup_str(key);
-	else
-	{
-		data = combine_str(dup_str(key), "=");
-		data = combine_str(data, dup_str(value));
-	}
-	if (!data)
-		error();
-	env->data = data;
-	env->key = dup_str(key);
-	if (value)
-		env->value = dup_str(value);
-}
-
-void	add_new_env(t_list **env_list, char *key, char *value)
-{
-	t_env	*new_env;
-	t_list	*tmp;
-
-	new_env = ft_envnew();
-	if (!new_env)
-		error();
-	tmp = make_new_node(new_env);
-	if (!tmp)
-		error();
-	update_env(new_env, key, value);
-	list_add_back(env_list, tmp);
-}
-
 t_env	*find_by_key(t_list *env_list, char *target_key)
 {
 	t_list	*list;
@@ -78,6 +44,40 @@ t_env	*find_by_key(t_list *env_list, char *target_key)
 		list = list->next;
 	}
 	return (NULL);
+}
+
+void	update_env(t_env *env, char *key, char *value)
+{
+	char	*data;
+
+	if (!value)
+		data = ft_strdup(key);
+	else
+	{
+		data = combine_str(ft_strdup(key), "=");
+		data = combine_str(data, ft_strdup(value));
+	}
+	if (!data)
+		printf("error\n");
+	env->data = data;
+	env->key = ft_strdup(key);
+	if (value)
+		env->value = ft_strdup(value);
+}
+
+void	add_new_env(t_list **env_list, char *key, char *value)
+{
+	t_env	*new_env;
+	t_list	*tmp;
+
+	new_env = ft_envnew();
+	if (!new_env)
+		printf("error\n");
+	tmp = ft_lstnew(new_env);
+	if (!tmp)
+		printf("error\n");
+	update_env(new_env, key, value);
+	ft_lstadd_back(env_list, tmp);
 }
 
 void	add_env(t_list **env_list, char *key, char *value)

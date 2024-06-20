@@ -6,26 +6,20 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 23:21:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/20 18:47:14 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:10:36 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
 
-# include "./minishell.h"
+# include "minishell.h"
+# include "utils.h"
 
-# define IN 1
-# define OUT 2
-# define HEREDOC 3
-# define OUT_APPEND 4
-
-typedef struct s_command {
-	t_io		*io_handler;
-	t_cmd		*cmd_lst;
-	t_redir		*redir_lst;
-	t_command	*next;
-}	t_command;
+# define R_IN 1
+# define R_OUT 2
+# define R_HEREDOC 3
+# define R_OUT_APPEND 4
 
 typedef struct s_redirection {
 	int						type;
@@ -45,6 +39,14 @@ typedef struct s_cmd{
 	struct s_cmd	*next;
 }	t_cmd;
 
+typedef struct s_command {
+	char				**path;
+	t_io				*io_handler;
+	t_cmd				*cmd_lst;
+	t_redir				*redir_lst;
+	struct s_command	*next;
+}	t_command;
+
 /** execute_heredoc.c */
 void	child_process(char *delimiter, t_io *io);
 
@@ -56,8 +58,8 @@ void	redir_out_append(t_redir *redir, t_io *io);
 
 /** execute.c */
 void	exec_redir(t_redir *redir, t_io	*io);
-void	exec_cmd(t_command *command);
-void	execute(t_command *command);
+void	exec_cmd(t_command *command, t_list *env_list);
+void	execute(t_command *command, t_list *env_list);
 
 void	error(void);
 

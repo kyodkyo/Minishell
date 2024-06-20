@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/20 18:48:10 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:07:26 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ typedef struct s_env
 }	t_env;
 
 // signal
-# define DEFAULT 1
-# define IGNORE 2
-# define SHELL 3
-# define HEREDOC 4
+# define DEFAULT 11
+# define IGNORE 12
+# define SHELL 13
+# define HEREDOC 14
 
 int	g_status_code;
 

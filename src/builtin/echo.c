@@ -6,32 +6,32 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:28:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 16:31:37 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:22:13 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-#include "utils.h"
+#include "minishell_t.h"
 
-void	echo(int argc, char **argv, char **envp)
+void	echo(t_cmd *cmd_list, t_io *io_handler)
 {
 	int	i;
 	int	option;
 
 	i = 1;
 	option = 0;
-	if (argc > 1 && compare_str(argv[1], "-n", 2) == 0)
+	if (cmd_list->str[1] && compare_str(cmd_list->str[1], "-n", 2) == 0)
 	{
 		i++;
 		option = 1;
 	}
-	while (argv[i])
+	while (cmd_list->str[i])
 	{
-		write(1, argv[i], ft_strlen(argv[i]));
-		if (argv[i + 1])
-			write(1, " ", 1);
+		write(io_handler->output_fd, cmd_list->str[i],
+			ft_strlen(cmd_list->str[i]));
+		if (cmd_list->str[i + 1])
+			write(io_handler->output_fd, " ", 1);
 		i++;
 	}
 	if (!option)
-		write(1, "\n", 1);
+		write(io_handler->output_fd, "\n", 1);
 }

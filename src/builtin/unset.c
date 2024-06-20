@@ -6,26 +6,25 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:32:56 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 16:30:48 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:22:29 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-#include "utils.h"
+#include "minishell_t.h"
 
-void	unset(int argc, char **argv, char **envp, t_list *env_list)
+void	unset(t_cmd *cmd_list, t_list *env_list)
 {
 	int		i;
 	char	*target_key;
 
 	i = 1;
-	if (!argv[1])
+	if (!cmd_list->str[1])
 		return ;
-	while (argv[i])
+	while (cmd_list->str[i])
 	{
-		target_key = argv[i];
-		if (is_valid_key(argv[i]))
-			write(2, "unset: invalid key", 18);
+		target_key = cmd_list->str[i];
+		if (is_valid_key(cmd_list->str[i]))
+			write(1, "unset: invalid key", 18);
 		else
 			unset_env(&env_list, target_key);
 		i++;

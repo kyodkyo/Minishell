@@ -6,27 +6,26 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:30:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 16:31:04 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:22:23 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-#include "utils.h"
+#include "minishell_t.h"
 
-void	export(int argc, char **argv, char **envp, t_list *env_list)
+void	export(t_cmd *cmd_list, t_list *env_list, t_io *io_handler)
 {
 	int		i;
 	char	*key;
 	char	*value;
 
 	i = 0;
-	if (!argv[1])
-		export_no_argv(env_list);
-	while (argv[++i])
+	if (!cmd_list->str[1])
+		export_no_argv(env_list, io_handler);
+	while (cmd_list->str[++i])
 	{
 		key = NULL;
 		value = NULL;
-		export_split_key_value(argv[i], &key, &value);
+		export_split_key_value(cmd_list->str[i], &key, &value);
 		if (is_valid_key(key))
 			printf("error\n");
 		else

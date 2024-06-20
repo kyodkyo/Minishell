@@ -6,22 +6,23 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:32:46 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 16:26:18 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:22:25 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell_t.h"
 
-void	pwd(int argc, char **argv, char **envp)
+void	pwd(t_io *io_handler)
 {
 	char	*current;
 
 	current = getcwd(NULL, 0);
 	if (current)
 	{
-		write(1, current, ft_strlen(current));
-		write(1, "\n", 1);
+		write(io_handler->output_fd, current, ft_strlen(current));
+		write(io_handler->output_fd, "\n", 1);
 	}
 	else
 		printf("error\n");
+	free(current);
 }

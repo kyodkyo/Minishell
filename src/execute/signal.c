@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:27:58 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/20 18:48:30 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:29:22 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_t.h"
 
 void	sig_shell(int sig)
 {

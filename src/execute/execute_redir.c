@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/20 16:27:05 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:29:36 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "minishell_t.h"
 
 void	redir_in(t_redir *redir, t_io *io)
 {
@@ -36,13 +36,13 @@ void	redir_out(t_redir *redir, t_io *io)
 	io->output_fd = fd;
 }
 
-void	redir_heredoc(t_redir *redir, t_io *io, int count)
+void	redir_heredoc(t_redir *redir, t_io *io)
 {
 	int		status;
 	char	*file;
 	pid_t	pid;
 
-	file = ft_strjoin("/tmp/.infile", ft_itoa(count));
+	file = ft_strjoin("/tmp/.infile", ft_itoa(1));
 	io->input_fd = open(file, O_CREAT, O_WRONLY, O_TRUNC, 0666);
 	set_signal(IGNORE, IGNORE);
 	pid = fork();
@@ -53,7 +53,6 @@ void	redir_heredoc(t_redir *redir, t_io *io, int count)
 	close(io->input_fd);
 	io->input_fd = open(file, O_RDONLY, 0644);
 	free(file);
-	free(count);
 }
 
 void	redir_out_append(t_redir *redir, t_io *io)

@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:32:21 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/20 16:27:29 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:22:33 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "minishell_t.h"
 
 void	child_process(char *delimiter, t_io *io)
 {
@@ -24,7 +24,7 @@ void	child_process(char *delimiter, t_io *io)
 		{
 			if (!cmp_str(line, delimiter))
 			{
-				status_code = 1;
+				g_status_code = 1;
 				break ;
 			}
 			write(io->input_fd, line, ft_strlen(line));

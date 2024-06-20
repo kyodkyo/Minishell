@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:54:19 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 17:57:39 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:23:47 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minishell_t.h"
 
 void	free_env_node(t_list **node)
 {

@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:33:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 17:16:04 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:23:53 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minishell_t.h"
 
 int	is_valid(char *s, int i)
 {

@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:30:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 17:54:00 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:23:50 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minishell_t.h"
 
 void	to_lowercase(char *str)
 {

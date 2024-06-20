@@ -6,18 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/20 18:28:03 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:29:02 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "execute.h"
-
-typedef struct s_redirection {
-	int		type;
-	char	*filename;
-	t_redir	*next;
-}	t_redir;
+#include "minishell_t.h"
 
 void	minishell(int argc, char **argv, char **envp)
 {
@@ -32,7 +25,7 @@ void	minishell(int argc, char **argv, char **envp)
 		if (input)
 		{
 			parse(input);
-			execute(command);
+			execute(command, env_list);
 		}
 		else
 			break ;
@@ -40,7 +33,7 @@ void	minishell(int argc, char **argv, char **envp)
 			add_history(input);
 		free(input);
 	}
-	return (0);
+	return ;
 }
 
 int	main(int argc, char **argv, char **envp)

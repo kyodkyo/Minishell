@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:24:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 17:30:06 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:23:42 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minishell_t.h"
 
 char	*get_next_key(t_list *env_list, char *prev)
 {

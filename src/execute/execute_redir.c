@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_redir.c                                       :+:      :+:    :+:   */
+/*   execute_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 16:26:25 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/20 16:27:05 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,24 @@ void	redir_out(t_redir *redir, t_io *io)
 	io->output_fd = fd;
 }
 
-void	redir_heredoc(t_redir *redir, t_io *io)
+void	redir_heredoc(t_redir *redir, t_io *io, int count)
 {
-	int		fd[2];
-	char	*line;
+	int		status;
+	char	*file;
+	pid_t	pid;
 
-	if (pipe(fd) < 0)
-		error();
-	if (io->input_fd != STDIN_FILENO)
-		close(io->input_fd);
-	while (1)
-	{
-		// line = readline();
-		if (!strcmp(line, redir->filename))
-		{
-			free(line);
-			break ;
-		}
-		//달러 처리 호출하기
-		write(fd[1], line, ft_strlen(line));
-		write(fd[1], "\n", 1);
-		free(line);
-	}
-	close(fd[1]);
-	io->input_fd = fd[0];
+	file = ft_strjoin("/tmp/.infile", ft_itoa(count));
+	io->input_fd = open(file, O_CREAT, O_WRONLY, O_TRUNC, 0666);
+	set_signal(IGNORE, IGNORE);
+	pid = fork();
+	if (pid == 0)
+		child_process(redir->filename, io);
+	waitpid(pid, &status, 0);
+	set_signal(SHELL, IGNORE);
+	close(io->input_fd);
+	io->input_fd = open(file, O_RDONLY, 0644);
+	free(file);
+	free(count);
 }
 
 void	redir_out_append(t_redir *redir, t_io *io)

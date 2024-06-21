@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:36:29 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/15 03:09:32 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/18 01:31:53 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "tokenize.h"
+# include "astree.h"
 
-void	parse(char *input);
+t_token	*parse(char *input);
 
 #endif

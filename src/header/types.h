@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/15 00:34:07 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/18 13:39:13 by woonshin         ###   ########.fr       */
+/*   Created: 2024/06/15 19:05:22 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/15 19:06:43 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include <stdio.h>
+#ifndef TYPES_H
+# define TYPES_H
+# define T_NULL 0
+# define T_WORD 1
+# define T_CMD 2
+# define T_ARG 3
+# define T_PIPE 4
+# define T_REDIR_IN 5
+# define T_REDIR_OUT 6
+# define T_REDIR_HERE 7
+# define T_REDIR_APPEND 8
+# define T_REDIR_ERR 9
 
-t_token	*parse(char *input)
-{
-	t_token	*token_lst;
-	t_token	*tmp;
-	t_ASTNode *ast;
-
-	token_lst = NULL;
-	tokenize(&token_lst, input);
-	tmp = token_lst;
-	while (tmp)
-	{
-		printf("%d %s -> ", tmp->type, tmp->str);
-		tmp = tmp->next;
-	}
-	printf("\n");
-	
-	ast = astree(token_lst);
-	print_ast(ast, 0);
-
-	free_ast(ast);
-
-	return (token_lst);
-}
+#endif

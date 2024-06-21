@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:42:41 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/15 06:46:54 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/18 13:38:41 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,5 @@
 # include "libft.h"
 # include "minishell.h"
 
-
-char	*expand_env(t_list *env_list, char *origin);
 
 #endif

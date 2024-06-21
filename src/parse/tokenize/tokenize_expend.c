@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:13:12 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/15 06:36:52 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/18 01:42:19 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ int	tokenize_expend(t_token **token_lst, t_token *token)
 	// 연결리스트 순차적으로 추가. 기존 token free
 
 	// 변경 없을시 return 0
+	return (0);
 }

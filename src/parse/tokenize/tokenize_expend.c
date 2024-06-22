@@ -6,17 +6,18 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:13:12 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 15:00:51 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:14:05 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
+#include "utils.h"
 
 /**
  * return 0 -> 변경 없음.
  * return 1 -> 변경 있음.
 */
-int	tokenize_expend(t_token **token_lst, t_token *token)
+int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token)
 {
 	t_token	*back;
 	char	*new_line;
@@ -25,7 +26,8 @@ int	tokenize_expend(t_token **token_lst, t_token *token)
 	if (back && back->type == T_REDIR_HERE)
 		return (0);
 	// new_line = dollar 함수 호출, 새로운 문자열 받기
-
+	new_line = expand_env(mini->env_list, token->str);
+	printf("new_line: %s\n", new_line);
 	// spliter_blank 함수 호출하고
 	// 연결리스트 순차적으로 추가. 기존 token free
 	// 변경 없을시 return 0

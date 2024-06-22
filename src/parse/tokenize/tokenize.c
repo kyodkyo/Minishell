@@ -6,13 +6,13 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:19:17 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 14:37:03 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:10:36 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-void	tokenize(t_token **token_lst, char *line)
+void	tokenize(t_mini *mini, t_token **token_lst, char *line)
 {
 	int		left;
 	int		right;
@@ -42,7 +42,7 @@ void	tokenize(t_token **token_lst, char *line)
 		if (right > left)
 		{
 			token = new_token(line, left, right);
-			if (tokenize_expend(token_lst, token) == 0)
+			if (tokenize_expend(mini, token_lst, token) == 0)
 				add_token(token_lst, token);
 		}
 	}

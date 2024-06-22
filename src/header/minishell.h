@@ -6,15 +6,15 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 15:03:43 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:15:26 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <readline/readline.h>
 # include <stdio.h>
+# include <readline/readline.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
@@ -22,14 +22,14 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
-# include "parse.h"
+# include "astree.h"
 
 # include "libft.h"
 
 typedef struct s_minishit
 {
-	t_list	*env_list;
-	t_
+	t_list		*env_list;
+	t_ASTNode	*astree_root;
 }	t_mini;
 
 // signal

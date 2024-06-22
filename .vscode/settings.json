@@ -7,7 +7,10 @@
 		"astree.h": "c",
 		"libft.h": "c",
 		"minishell_t.h": "c",
-		"tokenize.h": "c"
+		"tokenize.h": "c",
+		"stdio.h": "c",
+		"minishell.h": "c",
+		"readline.h": "c"
 	},
     "C_Cpp.errorSquiggles": "disabled"
 }

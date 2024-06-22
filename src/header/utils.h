@@ -6,13 +6,14 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:42:41 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 14:33:04 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:15:37 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+# include "minishell_t.h"
 # include "minishell.h"
 
 /** env_utils.c */

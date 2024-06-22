@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 02:19:23 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:21:30 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/21 02:46:24 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ typedef struct s_redirection {
 typedef struct s_iohandler {
 	int	input_fd;
 	int	output_fd;
-	int	pipe_read_fd;
-	int	pipe_write_fd;
+	int	pipe[2];
 }	t_io;
 
 typedef struct s_cmd{
@@ -87,6 +86,8 @@ void	redir_out_append(t_redir *redir, t_io *io);
 
 /** execute.c */
 void	exec_redir(t_redir *redir, t_io	*io);
+void	exec_fork(t_command *cur, t_cmd *cmd_list,
+			t_list *env_list, t_io *io_handler);
 void	exec_cmd(t_command *command, t_list *env_list);
 void	execute(t_command *command, t_list *env_list);
 

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:36:29 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/19 17:57:54 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 19:14:28 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include <stdlib.h>
-# include <stdio.h>
+# include "minishell_t.h"
 # include "tokenize.h"
+# include "astree.h"
 
-void	parse(char *input);
+int	parse(t_mini *mini, char *input);
 
 #endif

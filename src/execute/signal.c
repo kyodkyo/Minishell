@@ -3,25 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:27:58 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:29:22 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 19:02:55 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	sig_shell(int sig)
 {
-	if (sig == SHELL)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_status_code = 1;
-	}
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	g_status_code = 1;
 }
 
 void	sig_heredoc(int sig)

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 13:23:29 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 14:29:54 by woonshin         ###   ########.fr       */
+/*   Created: 2024/06/15 19:05:22 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/15 19:06:43 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
-# include "types.h"
-
-typedef struct s_token {
-	int				type;
-	char			*str;
-	struct s_token	*next;
-}	t_token;
+#ifndef TYPES_H
+# define TYPES_H
+# define T_NULL 0
+# define T_WORD 1
+# define T_CMD 2
+# define T_ARG 3
+# define T_PIPE 4
+# define T_REDIR_IN 5
+# define T_REDIR_OUT 6
+# define T_REDIR_HERE 7
+# define T_REDIR_APPEND 8
+# define T_REDIR_ERR 9
 
 #endif

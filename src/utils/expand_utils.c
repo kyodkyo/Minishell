@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:33:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:23:53 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:17:00 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 int	is_valid(char *s, int i)
 {

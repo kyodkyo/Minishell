@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:54:19 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:23:47 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:18:13 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	free_env_node(t_list **node)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_lst.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:32:56 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/19 18:03:05 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 14:36:38 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,23 @@ t_token	*new_token(char *line, int l, int r)
 
 	token = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (token == NULL)
-		exit(0);
+		exit(1);
 	token->str = ft_substr(line, l, r - l);
 	if (token->str == NULL)
-		exit(0);
+		exit(1);
 	token->type = get_token_type(token->str);
-	if (is_quotation_str(token->str, l, r))
+	if (is_quotation_str(line, l, r))
 	{
 		tmp = token->str;
 		if (l + 1 == r)
 			token->str = ft_calloc(0, sizeof(char));
 		else
-			token->str = ft_substr(token->str, l + 1, r - l - 2);
+		{
+			printf("is_quotation\n");
+			token->str = ft_substr(line, l + 1, r - l - 2);
+		}
 		if (token->str == NULL)
-			exit(0);
+			exit(1);
 		free(tmp);
 	}
 	return (token);

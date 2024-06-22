@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 17:56:21 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/19 17:56:58 by dakyo            ###   ########.fr       */
+/*   Created: 2024/06/05 13:26:42 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/22 19:12:05 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
-# include "./minishell.h"
-# include "./token.h"
+# include "minishell_t.h"
+# include "token.h"
 
-void	tokenize(t_token **token_lst, char *line);
-
-// tokenize_dollar
-int		tokenize_expend(t_token **token_lst, t_token *token);
+int	tokenize(t_mini *mini, t_token **token_lst, char *line);
 
 // token lst
 void	add_token(t_token **token_lst, t_token *token);
@@ -35,5 +32,6 @@ int		ft_strcmp(const char *s1, char *s2);
 int		get_token_type(const char *str);
 
 // dollar 
+int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token);
 
 #endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:19:17 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/19 18:02:47 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 19:14:13 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-void	tokenize(t_token **token_lst, char *line)
+int	tokenize(t_mini *mini, t_token **token_lst, char *line)
 {
 	int		left;
 	int		right;
@@ -29,9 +29,9 @@ void	tokenize(t_token **token_lst, char *line)
 		while (line[right] != '\0' && is_delimiter(line[right]))
 			right++;
 		left = right;
-		while (line[right] != '\0'
-			&& (!is_delimiter(line[right])
-				|| in_single_quote || in_double_quote))
+
+		while (line[right] != '\0' && 
+			(!is_delimiter(line[right]) || in_single_quote || in_double_quote))
 		{
 			if (line[right] == '\'' && !in_double_quote)
 				in_single_quote = !in_single_quote;
@@ -42,10 +42,11 @@ void	tokenize(t_token **token_lst, char *line)
 		if (right > left)
 		{
 			token = new_token(line, left, right);
-			if (tokenize_expend(token_lst, token) == 0)
+			if (tokenize_expend(mini, token_lst, token) == 0)
 				add_token(token_lst, token);
 		}
 	}
 	if (in_single_quote || in_double_quote)
-		exit(0);
+		return (1);
+	return (0);
 }

@@ -3,35 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/21 02:29:02 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 19:13:55 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	minishell(int argc, char **argv, char **envp)
 {
-	char		*input;
-	t_list		*env_list;
-	t_command	*command;
+	char	*input;
+	t_mini	mini;
+	int		result;
 
-	env_list = init_envp(envp);
+	mini.env_list = init_envp(envp);
 	while (1)
 	{
 		input = readline("minishell> ");
 		if (input)
 		{
-			parse(input);
-			execute(command, env_list);
+			result = parse(&mini, input);
+			if (result != 0)
+			{
+				printf("parse error\n");
+				free(input);
+				continue ;
+			}
+			print_ast(mini.astree_root, 0);
+			// execute(command, env_list);
+			free_ast(mini.astree_root);
 		}
 		else
 			break ;
 		if (cmp_str(input, ""))
 			add_history(input);
 		free(input);
+
+		// 실행
 	}
 	return ;
 }

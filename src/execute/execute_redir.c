@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:29:36 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:18:40 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	redir_in(t_redir *redir, t_io *io)
 {

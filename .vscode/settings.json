@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+		"*.jsx": "javascript",
+		"parse.h": "c",
+		"ptree.h": "c",
+		"token.h": "c",
+		"astree.h": "c",
+		"libft.h": "c",
+		"minishell.h": "c",
+		"tokenize.h": "c",
+		"stdio.h": "c",
+		"readline.h": "c",
+		"signal.h": "c",
+		"utils.h": "c",
+		"history.h": "c"
+	},
+    "C_Cpp.errorSquiggles": "disabled"
+}

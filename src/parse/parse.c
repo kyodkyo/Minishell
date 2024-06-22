@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:34:07 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/19 17:54:50 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 19:14:22 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include <stdio.h>
 
-void	parse(char *input)
+int	parse(t_mini *mini, char *input)
 {
 	t_token	*token_lst;
+	int		result;
 
 	token_lst = NULL;
-	tokenize(&token_lst, input);
-	while (token_lst)
-	{
-		printf("%d %s -> ", token_lst->type, token_lst->str);
-		token_lst = token_lst->next;
-	}
-	printf("\n");
+	result = tokenize(mini, &token_lst, input);
+	if (result != 0)
+		return (result);
+	mini->astree_root = astree(token_lst);
+	return (0);
 }

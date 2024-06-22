@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:36:29 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 18:49:07 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:14:28 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include "tokenize.h"
 # include "astree.h"
 
-t_ASTNode	*parse(t_mini *mini, char *input);
+int	parse(t_mini *mini, char *input);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:19:17 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 15:10:36 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:14:13 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-void	tokenize(t_mini *mini, t_token **token_lst, char *line)
+int	tokenize(t_mini *mini, t_token **token_lst, char *line)
 {
 	int		left;
 	int		right;
@@ -47,5 +47,6 @@ void	tokenize(t_mini *mini, t_token **token_lst, char *line)
 		}
 	}
 	if (in_single_quote || in_double_quote)
-		exit(1);
+		return (1);
+	return (0);
 }

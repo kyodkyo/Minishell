@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 18:49:27 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:13:55 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	minishell(int argc, char **argv, char **envp)
 {
 	char	*input;
 	t_mini	mini;
+	int		result;
 
 	mini.env_list = init_envp(envp);
 	while (1)
@@ -23,7 +24,13 @@ void	minishell(int argc, char **argv, char **envp)
 		input = readline("minishell> ");
 		if (input)
 		{
-			mini.astree_root = parse(&mini, input);
+			result = parse(&mini, input);
+			if (result != 0)
+			{
+				printf("parse error\n");
+				free(input);
+				continue ;
+			}
 			print_ast(mini.astree_root, 0);
 			// execute(command, env_list);
 			free_ast(mini.astree_root);

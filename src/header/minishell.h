@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 18:49:52 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:14:42 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@
 # include "parse.h"
 
 // signal
-# define DEFAULT 11
-# define IGNORE 12
-# define SHELL 13
 # define HEREDOC 14
 
 int g_status_code;
@@ -40,8 +37,6 @@ void	sig_shell(int sig);
 void	sig_heredoc(int sig);
 void	set_signal(int s_int, int s_quit);
 void	init_signal(void);
-
-void	tokenize(t_mini *mini, t_token **token_lst, char *line);
 
 // token lst
 void	add_token(t_token **token_lst, t_token *token);

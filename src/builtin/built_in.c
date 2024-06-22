@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:27:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:22:02 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:18:55 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 int	built_in(t_cmd *cmd_list, t_list *env_list, t_io *io_handler)
 {

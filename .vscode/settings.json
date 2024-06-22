@@ -6,11 +6,12 @@
 		"token.h": "c",
 		"astree.h": "c",
 		"libft.h": "c",
-		"minishell_t.h": "c",
+		"minishell.h": "c",
 		"tokenize.h": "c",
 		"stdio.h": "c",
-		"minishell.h": "c",
-		"readline.h": "c"
+		"readline.h": "c",
+		"signal.h": "c",
+		"utils.h": "c"
 	},
     "C_Cpp.errorSquiggles": "disabled"
 }

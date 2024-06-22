@@ -6,16 +6,15 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:26:42 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 15:14:22 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 17:04:18 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
-# include "minishell.h"
+# include "minishell_t.h"
 # include "token.h"
-# include "utils.h"
 
 void	tokenize(t_mini *mini, t_token **token_lst, char *line);
 

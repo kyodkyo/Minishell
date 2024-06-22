@@ -13,7 +13,7 @@ TARGET = minishell
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES) $(LIBFT)
-	$(CC) $(LIBFT) $(CFLAGS) $(OBJ_FILES) -o $@ -L $(LIBFT_DIR) $(INCLUDE) -lreadline
+	$(CC) $(LIBFT) $(CFLAGS) $(OBJ_FILES) -o $@ -L $(LIBFT_DIR) $(INCLUDE) -lreadline 
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -I $(LIBFT_DIR) -c $< -o $@ 

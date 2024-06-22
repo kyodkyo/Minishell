@@ -6,24 +6,24 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 14:35:51 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 17:22:57 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	minishell(int argc, char **argv, char **envp)
 {
 	char	*input;
-	t_list	*env_list;
+	t_mini	mini;
 
-	env_list = init_envp(envp);
+	mini.env_list = init_envp(envp);
 	while (1)
 	{
 		input = readline("minishell> ");
 		if (input)
 		{
-			parse(input);
+			parse(&mini, input);
 			// execute(command, env_list);
 		}
 		else

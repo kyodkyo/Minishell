@@ -6,11 +6,11 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:27:58 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/22 14:57:44 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 17:18:46 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	sig_shell(int sig)
 {

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:42:06 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/18 13:38:47 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 14:07:06 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ t_ASTNode *astree(t_token *tokens) {
 	return parse_pipeline(&current_token);
 }
 
-// 디버그용 AST 출력 함수
 void print_ast(t_ASTNode *node, int level) {
 	if (!node) return;
 	for (int i = 0; i < level; i++)

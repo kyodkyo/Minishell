@@ -6,16 +6,11 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/22 20:29:46 by dakyo            ###   ########.fr       */
-=======
-/*   Updated: 2024/06/22 19:13:55 by woonshin         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2024/06/23 02:47:31 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-<<<<<<< HEAD
 
 void	init_io_handler(t_io *io_handler)
 {
@@ -32,14 +27,7 @@ void	minishell(int argc, char **argv, char **envp)
 	char		*input;
 	t_io		io_handler;
 	t_mini		mini;
-=======
-
-void	minishell(int argc, char **argv, char **envp)
-{
-	char	*input;
-	t_mini	mini;
-	int		result;
->>>>>>> main
+	int			result;
 
 	mini.env_list = init_envp(envp);
 	while (1)
@@ -47,11 +35,6 @@ void	minishell(int argc, char **argv, char **envp)
 		input = readline("minishell> ");
 		if (input)
 		{
-<<<<<<< HEAD
-			parse(&mini, input);
-			init_io_handler(&io_handler);
-			execute_tree(mini.astree_root, mini.env_list, &io_handler);
-=======
 			result = parse(&mini, input);
 			if (result != 0)
 			{
@@ -59,18 +42,16 @@ void	minishell(int argc, char **argv, char **envp)
 				free(input);
 				continue ;
 			}
-			print_ast(mini.astree_root, 0);
-			// execute(command, env_list);
+			init_io_handler(&io_handler);
+			execute_tree(mini.astree_root, mini.env_list, &io_handler);
+			// print_ast(mini.astree_root, 0);
 			free_ast(mini.astree_root);
->>>>>>> main
 		}
 		else
 			break ;
 		if (cmp_str(input, ""))
 			add_history(input);
 		free(input);
-
-		// 실행
 	}
 	return ;
 }

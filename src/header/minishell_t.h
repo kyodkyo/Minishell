@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 02:19:23 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/22 21:21:05 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 02:34:29 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,14 @@ void	init_signal(void);
 # define R_HEREDOC 3
 # define R_OUT_APPEND 4
 
-typedef struct s_redirection {
-	int						type;
-	char					*filename;
-	struct s_redirection	*next;
-}	t_redir;
-
 typedef struct s_iohandler {
 	int	input_fd;
 	int	output_fd;
 	int	next_pipe;
 	int	prev_pipe;
+	int	pipe_read_fd;
+	int	pipe_write_fd;
 	int	pipe[2];
 }	t_io;
-
-typedef struct s_cmd {
-	char			**str;
-	struct s_cmd	*next;
-}	t_cmd;
 
 #endif

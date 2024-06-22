@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:32:56 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 14:36:38 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 02:43:53 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ t_token	*new_token(char *line, int l, int r)
 		if (l + 1 == r)
 			token->str = ft_calloc(0, sizeof(char));
 		else
-		{
-			printf("is_quotation\n");
 			token->str = ft_substr(line, l + 1, r - l - 2);
-		}
 		if (token->str == NULL)
 			exit(1);
 		free(tmp);

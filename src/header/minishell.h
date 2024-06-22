@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
 /*   Created: 2024/06/21 02:19:23 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 01:24:04 by dakyo            ###   ########.fr       */
-=======
-/*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 22:38:03 by woonshin         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2024/06/23 02:39:19 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +15,7 @@
 
 # include <stdio.h>
 # include <readline/readline.h>
-<<<<<<< HEAD
 # include <readline/history.h>
-=======
->>>>>>> main
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
@@ -31,33 +23,15 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
-<<<<<<< HEAD
 # include <dirent.h>
-
-# include "libft.h"
-
-int	g_status_code;
-
-typedef struct s_env
-{
-	char	*data;
-	char	*key;
-	char	*value;
-}	t_env;
-=======
 # include "astree.h"
 # include "minishell_t.h"
 # include "libft.h"
 # include "parse.h"
 
-typedef struct s_command {
-	char				**path;
-	t_io				*io_handler;
-	t_cmd				*cmd_lst;
-	t_redir				*redir_lst;
-	struct s_command	*next;
-}	t_command;
->>>>>>> main
+
+int	g_status_code;
+
 
 // signal
 # define HEREDOC 14
@@ -68,103 +42,11 @@ typedef struct s_command {
 # define R_HEREDOC 3
 # define R_OUT_APPEND 4
 
-<<<<<<< HEAD
-typedef struct s_ASTNode
-{
-	int					type;
-	char				*value; // filename, cmd, arg, 등
-	struct s_ASTNode	*left;
-	struct s_ASTNode	*right;
-	struct s_ASTNode	*next;
-}	t_ASTNode;
-
-typedef struct s_minishit
-{
-	t_list		*env_list;
-	t_ASTNode	*astree_root;
-}	t_mini;
-
-typedef struct s_redirection {
-	int						type;
-	char					*filename;
-	struct s_redirection	*next;
-}	t_redir;
-
-typedef struct s_iohandler {
-	int	input_fd;
-	int	output_fd;
-	int	pipe[2];
-	int	prev_pipe;
-	int	next_pipe;
-	int	pipe_read_fd;
-	int	pipe_write_fd;
-}	t_io;
-
-typedef struct s_cmd{
-	char			**str;
-	struct s_cmd	*next;
-}	t_cmd;
-
-typedef struct s_command {
-	char				**path;
-	t_io				*io_handler;
-	t_cmd				*cmd_lst;
-	t_redir				*redir_lst;
-	struct s_command	*next;
-}	t_command;
-
-# define T_NULL 0
-# define T_WORD 1
-# define T_CMD 2
-# define T_ARG 3
-# define T_PIPE 4
-# define T_REDIR_IN 5
-# define T_REDIR_OUT 6
-# define T_REDIR_HERE 7
-# define T_REDIR_APPEND 8
-# define T_REDIR_ERR 9
-
-typedef struct s_token {
-	int				type;
-	char			*str;
-	struct s_token	*next;
-}	t_token;
-
-=======
->>>>>>> main
 /** signal.c */
 void	sig_shell(int sig);
 void	sig_heredoc(int sig);
 void	set_signal(int s_int, int s_quit);
 void	init_signal(void);
-
-<<<<<<< HEAD
-void	tokenize(t_mini *mini, t_token **token_lst, char *line);
-
-=======
->>>>>>> main
-// token lst
-void	add_token(t_token **token_lst, t_token *token);
-t_token	*new_token(char *line, int l, int r);
-t_token	*token_lst_back(t_token *token_lst);
-void	token_lst_free(t_token **token_lst);
-void	token_free(t_token *token);
-
-// utils
-int		is_quotation_str(char *str, int l, int r);
-int		is_delimiter(char c);
-int		ft_strcmp(const char *s1, char *s2);
-int		get_token_type(const char *str);
-
-<<<<<<< HEAD
-// dollar 
-int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token);
-
-t_ASTNode	*astree(t_token *tokens);
-void 		print_ast(t_ASTNode *node, int level);
-void 		free_ast(t_ASTNode *node);
-
-t_token	*parse(t_mini *mini, char *input);
 
 /** execute_child.c */
 void	execute_user_defined(t_ASTNode *node, t_list *env_list, t_io *io);
@@ -205,31 +87,6 @@ void	built_in_exit(t_ASTNode *node);
 void	export(t_ASTNode *node, t_list *env_list, t_io *io_handler);
 void	pwd(t_io *io_handler);
 void	unset(t_ASTNode *node, t_list *env_list);
-=======
-/** execute_heredoc.c */
-void	child_process(char *delimiter, t_io *io);
-
-/** execute_redirection.c */
-void	redir_in(t_redir *redir, t_io *io);
-void	redir_out(t_redir *redir, t_io *io);
-void	redir_heredoc(t_redir *redir, t_io *io);
-void	redir_out_append(t_redir *redir, t_io *io);
-
-/** execute.c */
-void	exec_redir(t_redir *redir, t_io	*io);
-void	exec_cmd(t_command *command, t_list *env_list);
-void	execute(t_command *command, t_list *env_list);
-
-/** built_in.c */
-int		built_in(t_cmd *cmd_list, t_list *env_list, t_io *io_handler);
-void	cd(t_cmd *cmd_list, t_list *env_list);
-void	echo(t_cmd *cmd_list, t_io *io_handler);
-void	env(t_list *env_list, t_io *io_handler);
-void	built_in_exit(t_cmd *cmd_list);
-void	export(t_cmd *cmd_list, t_list *env_list, t_io *io_handler);
-void	pwd(t_io *io_handler);
-void	unset(t_cmd *cmd_list, t_list *env_list);
->>>>>>> main
 
 void	error(void);
 
@@ -276,8 +133,4 @@ int		copy_str_len(char *dst, const char *src, size_t dstsize);
 int		compare_str(const char *s1, const char *s2, size_t n);
 char	*get_substr(char const *s, unsigned int start, size_t len);
 
-<<<<<<< HEAD
 #endif
-=======
-#endif
->>>>>>> main

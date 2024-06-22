@@ -6,11 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:27:58 by dakyo             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/22 19:53:59 by dakyo            ###   ########.fr       */
-=======
-/*   Updated: 2024/06/22 19:02:55 by woonshin         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2024/06/23 02:36:27 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +14,11 @@
 
 void	sig_shell(int sig)
 {
-<<<<<<< HEAD
-	if (sig == SHELL)
-	{
-		printf("\n");
-		rl_on_new_line();
-		// rl_replace_line("", 0);
-		rl_redisplay();
-		g_status_code = 1;
-	}
-=======
 	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	// rl_on_new_line();
+	// rl_replace_line("", 0);
+	// rl_redisplay();
 	g_status_code = 1;
->>>>>>> main
 }
 
 void	sig_heredoc(int sig)

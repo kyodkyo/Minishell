@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:41:28 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 21:20:41 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 22:57:29 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct s_ASTNode
 
 t_ASTNode	*astree(t_token *tokens);
 void		print_ast(t_ASTNode *node, int level);
+void		free_ast(t_ASTNode *node);
+
+// utiles
+int			is_redirect(t_token *token);
+t_ASTNode	*create_node(int type, char *value);
+void		add_redirection(t_ASTNode *command_node, t_token **token);
+void		add_argument(t_ASTNode *command_node, t_token *token, int *cmd_set);
 void		free_ast(t_ASTNode *node);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/22 17:18:40 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 22:43:47 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	redir_out_append(t_redir *redir, t_io *io)
 	int	fd;
 
 	fd = open(redir->filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	if (fd < 0)
-		error();
+	// if (fd < 0)
+	// 	error();
 	if (io->output_fd != STDOUT_FILENO)
 		close(io->output_fd);
 	io->output_fd = fd;

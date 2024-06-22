@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 21:23:37 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 22:38:03 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # include "minishell_t.h"
 # include "libft.h"
 # include "parse.h"
+
+typedef struct s_command {
+	char				**path;
+	t_io				*io_handler;
+	t_cmd				*cmd_lst;
+	t_redir				*redir_lst;
+	struct s_command	*next;
+}	t_command;
 
 // signal
 # define HEREDOC 14

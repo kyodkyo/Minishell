@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 19:14:42 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 22:38:03 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,18 @@
 # include "libft.h"
 # include "parse.h"
 
+typedef struct s_command {
+	char				**path;
+	t_io				*io_handler;
+	t_cmd				*cmd_lst;
+	t_redir				*redir_lst;
+	struct s_command	*next;
+}	t_command;
+
 // signal
 # define HEREDOC 14
 
-int g_status_code;
+int	g_status_code;
 
 /** signal.c */
 void	sig_shell(int sig);
@@ -50,13 +58,6 @@ int		is_quotation_str(char *str, int l, int r);
 int		is_delimiter(char c);
 int		ft_strcmp(const char *s1, char *s2);
 int		get_token_type(const char *str);
-
-// dollar 
-int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token);
-
-t_ASTNode	*astree(t_token *tokens);
-void 		print_ast(t_ASTNode *node, int level);
-void 		free_ast(t_ASTNode *node);
 
 /** execute_heredoc.c */
 void	child_process(char *delimiter, t_io *io);

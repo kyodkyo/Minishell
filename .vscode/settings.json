@@ -1,11 +1,12 @@
 {
     "files.associations": {
-        "*.jsx": "javascript",
-        "parse.h": "c",
-        "ptree.h": "c",
-        "token.h": "c",
-        "astree.h": "c",
-        "libft.h": "c"
-    },
+		"*.jsx": "javascript",
+		"parse.h": "c",
+		"ptree.h": "c",
+		"token.h": "c",
+		"astree.h": "c",
+		"libft.h": "c",
+		"minishell_t.h": "c"
+	},
     "C_Cpp.errorSquiggles": "disabled"
 }

@@ -17,8 +17,8 @@ AR = ar rsu
 
 all: $(NAME)
 
-$(NAME):${OBJS}
-	$(AR) $(NAME) $(OBJS)
+$(NAME):${OBJS} ${OBJS_BONUS}
+	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o $@ 

@@ -16,7 +16,7 @@ $(TARGET): $(OBJ_FILES) $(LIBFT)
 	$(CC) $(LIBFT) $(CFLAGS) $(OBJ_FILES) -o $@ -L $(LIBFT_DIR) $(INCLUDE) -lreadline
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDE) -I $(LIBFT_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) -I $(LIBFT_DIR) -c $< -o $@ 
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

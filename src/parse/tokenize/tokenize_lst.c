@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:32:56 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/18 13:34:58 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 14:36:38 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	token_lst_free(t_token **token_lst)
 	*token_lst = NULL;
 }
 
-void token_free(t_token *token)
+void	token_free(t_token *token)
 {
 	if (token->str)
 		free(token->str);
@@ -44,7 +44,7 @@ t_token	*token_lst_back(t_token *token_lst)
 	return (token_lst);
 }
 
-void add_token(t_token **token_lst, t_token *token)
+void	add_token(t_token **token_lst, t_token *token)
 {
 	t_token	*back;
 
@@ -57,7 +57,7 @@ void add_token(t_token **token_lst, t_token *token)
 	back->next = token;
 }
 
-t_token *new_token(char *line, int l, int r)
+t_token	*new_token(char *line, int l, int r)
 {
 	t_token	*token;
 	char	*tmp;

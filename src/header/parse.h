@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 01:32:46 by dakyo             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/22 17:42:23 by dakyo            ###   ########.fr       */
-=======
-/*   Updated: 2024/06/22 17:19:51 by woonshin         ###   ########.fr       */
->>>>>>> main
+/*   Created: 2024/06/15 00:36:29 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/22 19:14:28 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-void	pwd(t_io *io_handler)
-{
-	char	*current;
+# include "minishell_t.h"
+# include "tokenize.h"
+# include "astree.h"
 
-	current = getcwd(NULL, 0);
-	if (current)
-	{
-		write(io_handler->output_fd, current, ft_strlen(current));
-		write(io_handler->output_fd, "\n", 1);
-	}
-	else
-		printf("error\n");
-	free(current);
-}
+int	parse(t_mini *mini, char *input);
+
+#endif

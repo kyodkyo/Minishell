@@ -3,10 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2024/06/21 02:19:23 by dakyo             #+#    #+#             */
 /*   Updated: 2024/06/23 01:24:04 by dakyo            ###   ########.fr       */
+=======
+/*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/22 22:38:03 by woonshin         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +20,10 @@
 
 # include <stdio.h>
 # include <readline/readline.h>
+<<<<<<< HEAD
 # include <readline/history.h>
+=======
+>>>>>>> main
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
@@ -23,6 +31,7 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
+<<<<<<< HEAD
 # include <dirent.h>
 
 # include "libft.h"
@@ -35,11 +44,22 @@ typedef struct s_env
 	char	*key;
 	char	*value;
 }	t_env;
+=======
+# include "astree.h"
+# include "minishell_t.h"
+# include "libft.h"
+# include "parse.h"
+
+typedef struct s_command {
+	char				**path;
+	t_io				*io_handler;
+	t_cmd				*cmd_lst;
+	t_redir				*redir_lst;
+	struct s_command	*next;
+}	t_command;
+>>>>>>> main
 
 // signal
-# define DEFAULT 11
-# define IGNORE 12
-# define SHELL 13
 # define HEREDOC 14
 
 // redirect
@@ -48,6 +68,7 @@ typedef struct s_env
 # define R_HEREDOC 3
 # define R_OUT_APPEND 4
 
+<<<<<<< HEAD
 typedef struct s_ASTNode
 {
 	int					type;
@@ -109,14 +130,19 @@ typedef struct s_token {
 	struct s_token	*next;
 }	t_token;
 
+=======
+>>>>>>> main
 /** signal.c */
 void	sig_shell(int sig);
 void	sig_heredoc(int sig);
 void	set_signal(int s_int, int s_quit);
 void	init_signal(void);
 
+<<<<<<< HEAD
 void	tokenize(t_mini *mini, t_token **token_lst, char *line);
 
+=======
+>>>>>>> main
 // token lst
 void	add_token(t_token **token_lst, t_token *token);
 t_token	*new_token(char *line, int l, int r);
@@ -130,6 +156,7 @@ int		is_delimiter(char c);
 int		ft_strcmp(const char *s1, char *s2);
 int		get_token_type(const char *str);
 
+<<<<<<< HEAD
 // dollar 
 int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token);
 
@@ -178,6 +205,31 @@ void	built_in_exit(t_ASTNode *node);
 void	export(t_ASTNode *node, t_list *env_list, t_io *io_handler);
 void	pwd(t_io *io_handler);
 void	unset(t_ASTNode *node, t_list *env_list);
+=======
+/** execute_heredoc.c */
+void	child_process(char *delimiter, t_io *io);
+
+/** execute_redirection.c */
+void	redir_in(t_redir *redir, t_io *io);
+void	redir_out(t_redir *redir, t_io *io);
+void	redir_heredoc(t_redir *redir, t_io *io);
+void	redir_out_append(t_redir *redir, t_io *io);
+
+/** execute.c */
+void	exec_redir(t_redir *redir, t_io	*io);
+void	exec_cmd(t_command *command, t_list *env_list);
+void	execute(t_command *command, t_list *env_list);
+
+/** built_in.c */
+int		built_in(t_cmd *cmd_list, t_list *env_list, t_io *io_handler);
+void	cd(t_cmd *cmd_list, t_list *env_list);
+void	echo(t_cmd *cmd_list, t_io *io_handler);
+void	env(t_list *env_list, t_io *io_handler);
+void	built_in_exit(t_cmd *cmd_list);
+void	export(t_cmd *cmd_list, t_list *env_list, t_io *io_handler);
+void	pwd(t_io *io_handler);
+void	unset(t_cmd *cmd_list, t_list *env_list);
+>>>>>>> main
 
 void	error(void);
 
@@ -224,4 +276,8 @@ int		copy_str_len(char *dst, const char *src, size_t dstsize);
 int		compare_str(const char *s1, const char *s2, size_t n);
 char	*get_substr(char const *s, unsigned int start, size_t len);
 
+<<<<<<< HEAD
 #endif
+=======
+#endif
+>>>>>>> main

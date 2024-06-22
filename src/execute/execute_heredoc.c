@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   execute_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 01:29:13 by dakyo             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/22 17:42:23 by dakyo            ###   ########.fr       */
-=======
-/*   Updated: 2024/06/22 17:19:51 by woonshin         ###   ########.fr       */
->>>>>>> main
+/*   Created: 2024/06/20 14:32:21 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/22 17:21:42 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
 
-void	env(t_list *env_list, t_io *io_handler)
+void	child_process(char *delimiter, t_io *io)
 {
-	char	*data;
+	char	*line;
 
-	while (env_list)
+	set_signal(HEREDOC, IGNORE);
+	while (1)
 	{
-		if (((t_env *)(env_list->content))->value)
+		line = readline("heredoc> ");
+		if (line)
 		{
-			data = ((t_env *)(env_list->content))->data;
-			write(io_handler->output_fd, data, ft_strlen(data));
-			write(io_handler->output_fd, "\n", 1);
+			if (!cmp_str(line, delimiter))
+			{
+				g_status_code = 1;
+				break ;
+			}
+			write(io->input_fd, line, ft_strlen(line));
+			write(io->input_fd, "\n", 1);
+			free(line);
 		}
-		env_list = env_list->next;
+		else
+			break ;
 	}
+	free(line);
+	exit(0);
 }

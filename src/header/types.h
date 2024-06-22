@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 01:32:46 by dakyo             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/22 17:42:23 by dakyo            ###   ########.fr       */
-=======
-/*   Updated: 2024/06/22 17:19:51 by woonshin         ###   ########.fr       */
->>>>>>> main
+/*   Created: 2024/06/15 19:05:22 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/15 19:06:43 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef TYPES_H
+# define TYPES_H
+# define T_NULL 0
+# define T_WORD 1
+# define T_CMD 2
+# define T_ARG 3
+# define T_PIPE 4
+# define T_REDIR_IN 5
+# define T_REDIR_OUT 6
+# define T_REDIR_HERE 7
+# define T_REDIR_APPEND 8
+# define T_REDIR_ERR 9
 
-void	pwd(t_io *io_handler)
-{
-	char	*current;
-
-	current = getcwd(NULL, 0);
-	if (current)
-	{
-		write(io_handler->output_fd, current, ft_strlen(current));
-		write(io_handler->output_fd, "\n", 1);
-	}
-	else
-		printf("error\n");
-	free(current);
-}
+#endif

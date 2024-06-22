@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 01:32:46 by dakyo             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/22 17:42:23 by dakyo            ###   ########.fr       */
-=======
-/*   Updated: 2024/06/22 17:19:51 by woonshin         ###   ########.fr       */
->>>>>>> main
+/*   Created: 2024/06/05 13:23:29 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/22 14:29:54 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef TOKEN_H
+# define TOKEN_H
+# include "types.h"
 
-void	pwd(t_io *io_handler)
-{
-	char	*current;
+typedef struct s_token {
+	int				type;
+	char			*str;
+	struct s_token	*next;
+}	t_token;
 
-	current = getcwd(NULL, 0);
-	if (current)
-	{
-		write(io_handler->output_fd, current, ft_strlen(current));
-		write(io_handler->output_fd, "\n", 1);
-	}
-	else
-		printf("error\n");
-	free(current);
-}
+#endif

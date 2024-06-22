@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execute_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2024/06/20 16:14:14 by dakyo             #+#    #+#             */
 /*   Updated: 2024/06/23 01:28:44 by dakyo            ###   ########.fr       */
+=======
+/*   Created: 2024/06/21 02:48:47 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/22 22:44:27 by woonshin         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+<<<<<<< HEAD
 void	execute_user_defined(t_ASTNode *node, t_list *env_list, t_io *io)
 {
 	char		*str;
@@ -25,6 +31,12 @@ void	execute_user_defined(t_ASTNode *node, t_list *env_list, t_io *io)
 	if (execve(execute_path, &node->next->value, environ) == -1)
 		execve_error();
 }
+=======
+// void    child_process()
+// {
+    
+// }
+>>>>>>> main
 
 void	execute_fork(t_ASTNode *node, t_list *env_list, t_io *io)
 {

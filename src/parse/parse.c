@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 01:27:57 by dakyo             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/23 01:30:53 by dakyo            ###   ########.fr       */
-=======
-/*   Updated: 2024/06/22 17:19:51 by woonshin         ###   ########.fr       */
->>>>>>> main
+/*   Created: 2024/06/15 00:34:07 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/22 19:14:22 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
+#include <stdio.h>
 
-void	cd(t_ASTNode *node, t_list *env_list)
+int	parse(t_mini *mini, char *input)
 {
-	int		res;
-	char	*path;
-	t_env	*env_home;
+	t_token	*token_lst;
+	int		result;
 
-	if (!node->value[1])
-	{
-		env_home = find_by_key(env_list, "HOME");
-		path = env_home->value;
-	}
-	else
-		path = &node->value[1];
-	res = chdir(path);
-	if (res == -1)
-		printf("error\n");
+	token_lst = NULL;
+	result = tokenize(mini, &token_lst, input);
+	if (result != 0)
+		return (result);
+	mini->astree_root = astree(token_lst);
+	return (0);
 }

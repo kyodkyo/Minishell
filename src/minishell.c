@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 17:22:57 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 18:49:27 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	minishell(int argc, char **argv, char **envp)
 		input = readline("minishell> ");
 		if (input)
 		{
-			parse(&mini, input);
+			mini.astree_root = parse(&mini, input);
+			print_ast(mini.astree_root, 0);
 			// execute(command, env_list);
+			free_ast(mini.astree_root);
 		}
 		else
 			break ;

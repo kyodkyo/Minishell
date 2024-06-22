@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 17:20:04 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 18:49:52 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token);
 t_ASTNode	*astree(t_token *tokens);
 void 		print_ast(t_ASTNode *node, int level);
 void 		free_ast(t_ASTNode *node);
-
-t_token	*parse(t_mini *mini, char *input);
-
 
 /** execute_heredoc.c */
 void	child_process(char *delimiter, t_io *io);

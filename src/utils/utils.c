@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:13:46 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:24:03 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:42:23 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	*str_join_len(void *dst, const void *src, size_t len)
 {

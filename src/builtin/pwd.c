@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:32:46 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:22:25 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:42:23 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	pwd(t_io *io_handler)
 {

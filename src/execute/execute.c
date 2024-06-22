@@ -5,95 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 16:14:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:49:30 by dakyo            ###   ########.fr       */
+/*   Created: 2024/06/22 19:50:16 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/23 01:25:21 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
-void	exec_redir(t_redir *redir, t_io	*io)
+void	check_next_pipe(t_ASTNode *node, t_io *io)
 {
-	if (redir->type == R_IN)
-		redir_in(redir, io);
-	else if (redir->type == R_OUT)
-		redir_out(redir, io);
-	else if (redir->type == R_HEREDOC)
-		redir_heredoc(redir, io);
-	else if (redir->type == R_OUT_APPEND)
-		redir_out_append(redir, io);
+	int	result;
+
+	if (node->right && node->right->type == T_PIPE)
+	{
+		result = pipe(io->pipe);
+		if (result < 0)
+			printf("error\n");
+		io->pipe_write_fd = io->pipe[1];
+		io->next_pipe = 1;
+	}
 }
 
-void	exec_fork(t_command *cur, t_cmd *cmd_list,
-		t_list *env_list, t_io *io_handler)
+void	execute_command(t_ASTNode *node, t_list *env_list, t_io *io)
 {
-	pid_t	pid;
-
-	if (pipe(io_handler->pipe) < 0)
-		printf("error\n");
-	pid = fork();
-	if (pid == -1)
-		printf("error\n");
-	else if (pid == 0)
-	{
-		if (!cur->next)
-			exit(1);
-		set_signal(DEFAULT, DEFAULT);
-		// child_process();
-		// exec_child_cmd();
-	}
+	if (io->input_fd != STDIN_FILENO)
+		dup2(STDIN_FILENO, io->input_fd);
+	if (io->output_fd != STDOUT_FILENO)
+		dup2(STDOUT_FILENO, io->output_fd);
+	if (built_in(node, env_list, io) == -1)
+		return ;
 	else
-	{
-		set_signal(IGNORE, IGNORE);
-		// parent_process();
-	}
+		execute_fork(node, env_list, io);
 }
 
-void	exec_child_cmd()
+void	execute_node(t_ASTNode *node, t_list *env_list, t_io *io)
 {
-	
+	if (node->type == T_PIPE)
+		check_next_pipe(node, io);
+	if (node->type == T_CMD)
+		execute_command(node, env_list, io);
+	if (node->type == T_REDIR_IN)
+		redir_in(node, io);
+	if (node->type == T_REDIR_OUT)
+		redir_out(node, io);
+	if (node->type == T_REDIR_HERE)
+		redir_heredoc(node, io);
+	if (node->type == T_REDIR_APPEND)
+		redir_out_append(node, io);
+	if (node->type == T_REDIR_ERR)
+		printf("not yet\n");
+		// redirect_error(node, env_list, io);
 }
 
-void	exec_cmd(t_command *command, t_list *env_list)
+void	execute_tree(t_ASTNode *node, t_list *env_list, t_io *io)
 {
-	t_cmd		*cmd_list;
-	t_io		*io_handler;
-	t_command	*cur_cmd;
-
-	cur_cmd = command;
-	while (cur_cmd)
-	{
-		cmd_list = command->cmd_lst;
-		io_handler = command->io_handler;
-		if (!cur_cmd->next && built_in(cmd_list, env_list, io_handler))
-			return ;
-		else
-			exec_fork(cur_cmd, cmd_list, env_list, io_handler);
-		if (cur_cmd->next)
-			cur_cmd = cur_cmd->next;
-	}
-	// g_status_code = set_status_cde();
-}
-
-void	execute(t_command *command, t_list *env_list)
-{
-	t_redir		*list;
-	t_command	*cur;
-
-	// io_init();
-	cur = command;
-	while (cur)
-	{
-		list = command->redir_lst;
-		while (list)
-		{
-			exec_redir(list, cur->io_handler);
-			if (list->next)
-				list = list->next;
-		}
-		if (cur->next)
-			cur = cur->next;
-	}
-	exec_cmd(command, env_list);
-	//다 끝나면 fd 원상복구
+	execute_node(node, env_list, io);
+	if (node->left)
+		execute_tree(node->left, env_list, io);
+	if (node->right)
+		execute_tree(node->right, env_list, io);
 }

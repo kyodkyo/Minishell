@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:29:13 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:22:17 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:42:23 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	env(t_list *env_list, t_io *io_handler)
 {

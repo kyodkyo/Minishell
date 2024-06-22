@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:22:54 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/21 02:23:57 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:42:23 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_t.h"
+#include "minishell.h"
 
 void	change_to_value(char *result, char *front, char *env_value, char *back)
 {

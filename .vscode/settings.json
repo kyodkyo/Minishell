@@ -11,7 +11,8 @@
 		"stdio.h": "c",
 		"readline.h": "c",
 		"signal.h": "c",
-		"utils.h": "c"
+		"utils.h": "c",
+		"history.h": "c"
 	},
     "C_Cpp.errorSquiggles": "disabled"
 }

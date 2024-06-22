@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:14:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/22 17:18:43 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:39:47 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,32 @@ void	exec_redir(t_redir *redir, t_io	*io)
 		redir_out_append(redir, io);
 }
 
-void	exec_fork(t_command *command, t_cmd *cmd_list, t_list *env_list)
+void	exec_fork(t_command *cur, t_cmd *cmd_list,
+		t_list *env_list, t_io *io_handler)
+{
+	pid_t	pid;
+
+	if (pipe(io_handler->pipe) < 0)
+		printf("error\n");
+	pid = fork();
+	if (pid == -1)
+		printf("error\n");
+	else if (pid == 0)
+	{
+		if (!cur->next)
+			exit(1);
+		set_signal(DEFAULT, DEFAULT);
+		// child_process();
+		// exec_child_cmd();
+	}
+	else
+	{
+		set_signal(IGNORE, IGNORE);
+		// parent_process();
+	}
+}
+
+void	exec_child_cmd()
 {
 	
 }
@@ -43,7 +68,7 @@ void	exec_cmd(t_command *command, t_list *env_list)
 		if (!cur_cmd->next && built_in(cmd_list, env_list, io_handler))
 			return ;
 		else
-			exec_fork(cur_cmd, cmd_list, env_list);
+			exec_fork(cur_cmd, cmd_list, env_list, io_handler);
 		if (cur_cmd->next)
 			cur_cmd = cur_cmd->next;
 	}
@@ -71,9 +96,4 @@ void	execute(t_command *command, t_list *env_list)
 	}
 	exec_cmd(command, env_list);
 	//다 끝나면 fd 원상복구
-}
-
-void	error(void)
-{
-	printf("error");
 }

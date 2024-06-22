@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 14:43:48 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:03:43 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
+# include "parse.h"
 
 # include "libft.h"
 
+typedef struct s_minishit
+{
+	t_list	*env_list;
+	t_
+}	t_mini;
 
 // signal
 # define DEFAULT 11

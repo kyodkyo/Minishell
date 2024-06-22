@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:42:06 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 14:07:06 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:23:20 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ t_ASTNode *parse_command(t_token **current_token) {
 			redir_node->left = NULL;
 			redir_node->right = NULL;
 
-			t_ASTNode *current_redirect = command_node;
-			while (current_redirect->left)
-				current_redirect = current_redirect->left;
-			current_redirect->left = redir_node;
+			redir_node->left = command_node->left;
+			command_node->left = redir_node;
+			// t_ASTNode *current_redirect = command_node;
+			// while (current_redirect->left)
+			// 	current_redirect = current_redirect->left;
+			// current_redirect->left = redir_node;
 
 		} else {
 			arg_node = (t_ASTNode *)ft_calloc(1, sizeof(t_ASTNode));

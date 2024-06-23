@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 11:40:10 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 14:36:44 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:14:45 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ void	set_cmd_path(t_ASTNode *node, t_list *env_list)
 	if (node->right != NULL)
 		set_cmd_path(node->right, env_list);
 	if (node->type == T_CMD)
-		node->path = get_cmd_path(node->value, env_list);
+		node->cmd->path = get_cmd_path(node->value, env_list);
 }

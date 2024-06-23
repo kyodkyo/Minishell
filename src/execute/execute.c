@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 19:50:16 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 12:34:28 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/23 16:32:50 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	check_next_pipe(t_ASTNode *node, t_io *io)
 
 void	execute_command(t_ASTNode *node, t_list *env_list, t_io *io)
 {
-	if (io->input_fd != STDIN_FILENO)
-		dup2(STDIN_FILENO, io->input_fd);
-	if (io->output_fd != STDOUT_FILENO)
-		dup2(STDOUT_FILENO, io->output_fd);
+	// if (io->input_fd != STDIN_FILENO)
+	// 	dup2(STDIN_FILENO, io->input_fd);
+	// if (io->output_fd != STDOUT_FILENO)
+	// 	dup2(STDOUT_FILENO, io->output_fd);
 	if (built_in(node, env_list, io) == 0)
 		return ;
 	else
@@ -59,9 +59,9 @@ void	execute_node(t_ASTNode *node, t_list *env_list, t_io *io)
 
 void	execute_tree(t_ASTNode *node, t_list *env_list, t_io *io)
 {
-	execute_node(node, env_list, io);
 	if (node->left)
 		execute_tree(node->left, env_list, io);
+	execute_node(node, env_list, io);
 	if (node->right)
 		execute_tree(node->right, env_list, io);
 }

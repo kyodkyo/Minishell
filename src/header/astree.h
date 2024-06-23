@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:41:28 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 15:41:49 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:52:52 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_command
 	char	*name;
 	char	*path;
 	char	**argv;
+	int		argc;
 }	t_cmd;
 
 typedef struct s_ASTNode

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:42:06 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 15:46:38 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:14:09 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	print_ast(t_ASTNode *node, int level)
 		for (int j = 0; node->cmd->argv[j]; j++)
 			printf("%s, ", node->cmd->argv[j]);
 		printf("\n");
+		printf("path: %s\n", node->cmd->path);
 	}
 	if (node->left)
 	{

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:35:16 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:47:34 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ void	redir_heredoc(t_ASTNode *node, t_io *io)
 	char	*file;
 	pid_t	pid;
 
-	file = ft_strjoin("/tmp/.infile", ft_itoa(1));
-	io->input_fd = open(file, O_CREAT, O_WRONLY, O_TRUNC, 0666);
+	file = ft_strjoin("/tmp/.infile", ft_itoa(1)); // 이거 변경.
+	io->input_fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// 음수
 	set_signal(IGNORE, IGNORE);
 	pid = fork();
 	if (pid == 0)

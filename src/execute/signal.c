@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:27:58 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:36:27 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:34:45 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	sig_shell(int sig)
 {
 	printf("\n");
-	// rl_on_new_line();
+	rl_on_new_line();
 	// rl_replace_line("", 0);
-	// rl_redisplay();
+	rl_redisplay();
 	g_status_code = 1;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 19:50:16 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:33:00 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:34:28 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	execute_command(t_ASTNode *node, t_list *env_list, t_io *io)
 		dup2(STDIN_FILENO, io->input_fd);
 	if (io->output_fd != STDOUT_FILENO)
 		dup2(STDOUT_FILENO, io->output_fd);
-	if (built_in(node, env_list, io) == -1)
+	if (built_in(node, env_list, io) == 0)
 		return ;
 	else
 		execute_fork(node, env_list, io);

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:41:28 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 22:57:29 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:41:49 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 # include "token.h"
 # include "libft.h"
 
+typedef struct s_command
+{
+	char	*name;
+	char	*path;
+	char	**argv;
+}	t_cmd;
+
 typedef struct s_ASTNode
 {
 	int					type;
@@ -22,6 +29,8 @@ typedef struct s_ASTNode
 	struct s_ASTNode	*left;
 	struct s_ASTNode	*right;
 	struct s_ASTNode	*next;
+	char				*path;
+	t_cmd				*cmd;
 }	t_ASTNode;
 
 t_ASTNode	*astree(t_token *tokens);
@@ -34,5 +43,8 @@ t_ASTNode	*create_node(int type, char *value);
 void		add_redirection(t_ASTNode *command_node, t_token **token);
 void		add_argument(t_ASTNode *command_node, t_token *token, int *cmd_set);
 void		free_ast(t_ASTNode *node);
+
+// cmd
+void	new_cmd(t_ASTNode *node);
 
 #endif

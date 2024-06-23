@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:42:06 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 22:56:39 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:43:48 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_ASTNode	*parse_command(t_token **current_token)
 			add_argument(command_node, *current_token, &cmd_set);
 		*current_token = (*current_token)->next;
 	}
+	new_cmd(command_node);
 	return (command_node);
 }
 
@@ -66,6 +67,15 @@ void	print_ast(t_ASTNode *node, int level)
 	while (i++ < level)
 		printf("  ");
 	printf("Type: %d, Value: %s\n", node->type, node->value);
+	
+	if (node->type == T_CMD)
+	{
+		printf("argv: ");
+		for (int j = 0; node->cmd->argv[j]; j++)
+			printf("%s, ", node->cmd->argv[j]);
+		printf("\n");
+	}
+
 	if (node->left)
 	{
 		printf("Left:\n");
@@ -78,7 +88,7 @@ void	print_ast(t_ASTNode *node, int level)
 	}
 	if (node->next)
 	{
-		printf("Next:\n");
+		printf("next:\n");
 		print_ast(node->next, level + 1);
 	}
 }

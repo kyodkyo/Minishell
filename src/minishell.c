@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 02:47:31 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:43:27 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	minishell(int argc, char **argv, char **envp)
 				free(input);
 				continue ;
 			}
-			init_io_handler(&io_handler);
-			execute_tree(mini.astree_root, mini.env_list, &io_handler);
-			// print_ast(mini.astree_root, 0);
+			// init_io_handler(&io_handler);
+			// execute_tree(mini.astree_root, mini.env_list, &io_handler);
+			print_ast(mini.astree_root, 0);
 			free_ast(mini.astree_root);
 		}
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:30:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:29:58 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:22:59 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	export(t_ASTNode *node, t_list *env_list, t_io *io_handler)
 	char	*value;
 
 	i = 0;
-	if (!node->value[1])
+	if (!node->cmd->argv[1])
 		export_no_argv(env_list, io_handler);
-	while (node->value[++i])
+	while (node->cmd->argv[++i])
 	{
 		key = NULL;
 		value = NULL;
-		export_split_key_value(&node->value[i], &key, &value);
+		export_split_key_value(node->cmd->argv[i], &key, &value);
 		if (is_valid_key(key))
 			printf("error\n");
 		else

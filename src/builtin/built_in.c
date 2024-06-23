@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:27:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:29:48 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:17:36 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 int	built_in(t_ASTNode *node, t_list *env_list, t_io *io)
 {
-	if (node->value[0])
-		return (-1);
-	to_lowercase(&node->value[0]);
-	if (!cmp_str(&node->value[0], "cd"))
+	to_lowercase(node->value);
+	if (!cmp_str(node->value, "cd"))
 		cd(node, env_list);
-	else if (!cmp_str(&node->value[0], "echo"))
+	else if (!cmp_str(node->value, "echo"))
 		echo(node, io);
-	else if (!cmp_str(&node->value[0], "env"))
+	else if (!cmp_str(node->value, "env"))
 		env(env_list, io);
-	else if (!cmp_str(&node->value[0], "exit"))
+	else if (!cmp_str(node->value, "exit"))
 		built_in_exit(node);
-	else if (!cmp_str(&node->value[0], "export"))
+	else if (!cmp_str(node->value, "export"))
 		export(node, env_list, io);
-	else if (!cmp_str(&node->value[0], "pwd"))
+	else if (!cmp_str(node->value, "pwd"))
 		pwd(io);
-	else if (!cmp_str(&node->value[0], "unset"))
+	else if (!cmp_str(node->value, "unset"))
 		unset(node, env_list);
 	else
 		return (-1);

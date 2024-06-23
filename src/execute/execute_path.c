@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 11:40:10 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 16:14:45 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:54:02 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	*get_cmd_path(char *cmd, t_list *env_list)
 	char	*cur_path;
 	char	*result;
 
+	if (!cmd)
+		return (NULL);
 	if (ft_strncmp(cmd, "/", 1) == 0)
 		result = ft_strdup(cmd);
 	else if (ft_strncmp("./", cmd, 2) == 0)

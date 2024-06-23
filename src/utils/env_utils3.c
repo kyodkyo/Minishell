@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:30:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:23:12 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:01:02 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	to_lowercase(char *str)
 {
 	int	i;
 
+	if (str == NULL)
+		return ;
 	i = 0;
 	while (str[i])
 	{

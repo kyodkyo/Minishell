@@ -17,6 +17,9 @@
 		"unistd.h": "c",
 		"msignal.h": "c",
 		"builtin.h": "c",
-		"env_utils.h": "c"
+		"env_utils.h": "c",
+		"execute.h": "c",
+		"fcntl.h": "c",
+		"stdlib.h": "c"
 	},
 }

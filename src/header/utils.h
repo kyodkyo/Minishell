@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:42:41 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 21:25:25 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:57:51 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		cmp_str(char *s1, char *s2);
 int		is_valid(char *s, int i);
 int		find_start_pos(char *s);
 int		find_end_pos(char *s, int i);
-char	*get_value(t_list *env_list, char *key);
+char	*get_env_value(t_list *env_list, char *key);
 
 /** expand.c */
 void	change_to_value(char *result, char *front, char *env_value, char *back);

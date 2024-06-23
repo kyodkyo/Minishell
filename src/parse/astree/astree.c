@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:42:06 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 15:43:48 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:46:38 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	print_ast(t_ASTNode *node, int level)
 	while (i++ < level)
 		printf("  ");
 	printf("Type: %d, Value: %s\n", node->type, node->value);
-	
 	if (node->type == T_CMD)
 	{
 		printf("argv: ");
@@ -75,7 +74,6 @@ void	print_ast(t_ASTNode *node, int level)
 			printf("%s, ", node->cmd->argv[j]);
 		printf("\n");
 	}
-
 	if (node->left)
 	{
 		printf("Left:\n");

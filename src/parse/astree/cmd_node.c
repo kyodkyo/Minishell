@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:41:19 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 15:43:19 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:46:13 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ char	**concat_args(t_ASTNode *node)
 		tmp_node = tmp_node->next;
 		i++;
 	}
-	return result;
+	return (result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/15 00:35:44 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 22:38:03 by woonshin         ###   ########.fr       */
+/*   Created: 2024/06/21 02:19:23 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/23 12:15:52 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
@@ -22,23 +23,25 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
+# include <dirent.h>
 # include "astree.h"
 # include "minishell_t.h"
 # include "libft.h"
 # include "parse.h"
+# include "execute.h"
 
-typedef struct s_command {
-	char				**path;
-	t_io				*io_handler;
-	t_cmd				*cmd_lst;
-	t_redir				*redir_lst;
-	struct s_command	*next;
-}	t_command;
+
+int	g_status_code;
+
 
 // signal
 # define HEREDOC 14
 
-int	g_status_code;
+// redirect
+# define R_IN 1
+# define R_OUT 2
+# define R_HEREDOC 3
+# define R_OUT_APPEND 4
 
 /** signal.c */
 void	sig_shell(int sig);
@@ -46,44 +49,45 @@ void	sig_heredoc(int sig);
 void	set_signal(int s_int, int s_quit);
 void	init_signal(void);
 
-// token lst
-void	add_token(t_token **token_lst, t_token *token);
-t_token	*new_token(char *line, int l, int r);
-t_token	*token_lst_back(t_token *token_lst);
-void	token_lst_free(t_token **token_lst);
-void	token_free(t_token *token);
+/** execute_child.c */
+void	execute_user_defined(t_ASTNode *node, t_list *env_list, t_io *io);
+void	execute_fork(t_ASTNode *node, t_list *env_list, t_io *io);
 
-// utils
-int		is_quotation_str(char *str, int l, int r);
-int		is_delimiter(char c);
-int		ft_strcmp(const char *s1, char *s2);
-int		get_token_type(const char *str);
+/** execute_dup.c */
+void	check_pipe_read(t_io *io);
+void	set_process_io(t_io *io);
+void	close_pipe(t_io *io);
+void	close_file(t_io *io);
 
-/** execute_heredoc.c */
-void	child_process(char *delimiter, t_io *io);
+/** execute_redir.c */
+void	redir_in(t_ASTNode *node, t_io *io);
+void	redir_out(t_ASTNode *node, t_io *io);
+void	redir_heredoc(t_ASTNode *node, t_io *io);
+void	redir_out_append(t_ASTNode *node, t_io *io);
+void	heredoc_child_process(char *delimiter, t_io *io);
 
-/** execute_redirection.c */
-void	redir_in(t_redir *redir, t_io *io);
-void	redir_out(t_redir *redir, t_io *io);
-void	redir_heredoc(t_redir *redir, t_io *io);
-void	redir_out_append(t_redir *redir, t_io *io);
+/** execute_utils.c */
+char	*is_valid_path(char **path, char *result, char *tmp);
+void	check_slash_exist(char *cmd);
+char	*get_execute_path(char **path, char *cmd);
+void	execve_error(void);
+void	set_parent_status(int status);
 
 /** execute.c */
-void	exec_redir(t_redir *redir, t_io	*io);
-void	exec_cmd(t_command *command, t_list *env_list);
-void	execute(t_command *command, t_list *env_list);
+void	check_next_pipe(t_ASTNode *node, t_io *io);
+void	execute_command(t_ASTNode *node, t_list *env_list, t_io *io);
+void	execute_node(t_ASTNode *node, t_list *env_list, t_io *io);
+void	execute_tree(t_ASTNode *node, t_list *env_list, t_io *io);
 
 /** built_in.c */
-int		built_in(t_cmd *cmd_list, t_list *env_list, t_io *io_handler);
-void	cd(t_cmd *cmd_list, t_list *env_list);
-void	echo(t_cmd *cmd_list, t_io *io_handler);
+int		built_in(t_ASTNode *node, t_list *env_list, t_io *io);
+void	cd(t_ASTNode *node, t_list *env_list);
+void	echo(t_ASTNode *node, t_io *io_handler);
 void	env(t_list *env_list, t_io *io_handler);
-void	built_in_exit(t_cmd *cmd_list);
-void	export(t_cmd *cmd_list, t_list *env_list, t_io *io_handler);
+void	built_in_exit(t_ASTNode *node);
+void	export(t_ASTNode *node, t_list *env_list, t_io *io_handler);
 void	pwd(t_io *io_handler);
-void	unset(t_cmd *cmd_list, t_list *env_list);
-
-void	error(void);
+void	unset(t_ASTNode *node, t_list *env_list);
 
 /** env_utils.c */
 char	*get_next_key(t_list *env_list, char *prev);
@@ -109,7 +113,7 @@ int		cmp_str(char *s1, char *s2);
 int		is_valid(char *s, int i);
 int		find_start_pos(char *s);
 int		find_end_pos(char *s, int i);
-char	*get_value(t_list *env_list, char *key);
+char	*get_env_value(t_list *env_list, char *key);
 
 /** expand.c */
 void	change_to_value(char *result, char *front, char *env_value, char *back);

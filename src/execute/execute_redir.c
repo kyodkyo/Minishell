@@ -6,17 +6,17 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/22 22:43:47 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 02:35:16 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	redir_in(t_redir *redir, t_io *io)
+void	redir_in(t_ASTNode *node, t_io *io)
 {
 	int	fd;
 
-	fd = open(redir->filename, O_RDONLY);
+	fd = open(node->value, O_RDONLY);
 	if (fd < 0)
 		printf("error\n");
 	if (io->input_fd != STDIN_FILENO)
@@ -24,11 +24,11 @@ void	redir_in(t_redir *redir, t_io *io)
 	io->input_fd = fd;
 }
 
-void	redir_out(t_redir *redir, t_io *io)
+void	redir_out(t_ASTNode *node, t_io *io)
 {
 	int	fd;
 
-	fd = open(redir->filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	fd = open(node->value, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
 		printf("error\n");
 	if (io->output_fd != STDOUT_FILENO)
@@ -36,7 +36,7 @@ void	redir_out(t_redir *redir, t_io *io)
 	io->output_fd = fd;
 }
 
-void	redir_heredoc(t_redir *redir, t_io *io)
+void	redir_heredoc(t_ASTNode *node, t_io *io)
 {
 	int		status;
 	char	*file;
@@ -47,7 +47,7 @@ void	redir_heredoc(t_redir *redir, t_io *io)
 	set_signal(IGNORE, IGNORE);
 	pid = fork();
 	if (pid == 0)
-		child_process(redir->filename, io);
+		heredoc_child_process(node->value, io);
 	waitpid(pid, &status, 0);
 	set_signal(SHELL, IGNORE);
 	close(io->input_fd);
@@ -55,14 +55,40 @@ void	redir_heredoc(t_redir *redir, t_io *io)
 	free(file);
 }
 
-void	redir_out_append(t_redir *redir, t_io *io)
+void	redir_out_append(t_ASTNode *node, t_io *io)
 {
 	int	fd;
 
-	fd = open(redir->filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	fd = open(node->value, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	// if (fd < 0)
 	// 	error();
 	if (io->output_fd != STDOUT_FILENO)
 		close(io->output_fd);
 	io->output_fd = fd;
+}
+
+void	heredoc_child_process(char *delimiter, t_io *io)
+{
+	char	*line;
+
+	set_signal(HEREDOC, IGNORE);
+	while (1)
+	{
+		line = readline("heredoc> ");
+		if (line)
+		{
+			if (!cmp_str(line, delimiter))
+			{
+				g_status_code = 1;
+				break ;
+			}
+			write(io->input_fd, line, ft_strlen(line));
+			write(io->input_fd, "\n", 1);
+			free(line);
+		}
+		else
+			break ;
+	}
+	free(line);
+	exit(0);
 }

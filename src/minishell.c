@@ -6,17 +6,28 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 19:13:55 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 02:47:31 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	init_io_handler(t_io *io_handler)
+{
+	io_handler->input_fd = STDIN_FILENO;
+	io_handler->output_fd = STDOUT_FILENO;
+	io_handler->next_pipe = 0;
+	io_handler->prev_pipe = 0;
+	io_handler->pipe_read_fd = STDIN_FILENO;
+	io_handler->pipe_write_fd = STDOUT_FILENO;
+}
+
 void	minishell(int argc, char **argv, char **envp)
 {
-	char	*input;
-	t_mini	mini;
-	int		result;
+	char		*input;
+	t_io		io_handler;
+	t_mini		mini;
+	int			result;
 
 	mini.env_list = init_envp(envp);
 	while (1)
@@ -31,8 +42,9 @@ void	minishell(int argc, char **argv, char **envp)
 				free(input);
 				continue ;
 			}
-			print_ast(mini.astree_root, 0);
-			// execute(command, env_list);
+			init_io_handler(&io_handler);
+			execute_tree(mini.astree_root, mini.env_list, &io_handler);
+			// print_ast(mini.astree_root, 0);
 			free_ast(mini.astree_root);
 		}
 		else
@@ -40,8 +52,6 @@ void	minishell(int argc, char **argv, char **envp)
 		if (cmp_str(input, ""))
 			add_history(input);
 		free(input);
-
-		// 실행
 	}
 	return ;
 }

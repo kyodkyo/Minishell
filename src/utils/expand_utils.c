@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:33:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/22 17:17:00 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:57:51 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	find_end_pos(char *s, int i)
 	return (i - 1);
 }
 
-char	*get_value(t_list *env_list, char *key)
+char	*get_env_value(t_list *env_list, char *key)
 {
 	char	*result;
 	t_env	*env;

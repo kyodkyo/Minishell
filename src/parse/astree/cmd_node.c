@@ -6,36 +6,44 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:41:19 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 15:46:13 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:53:40 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "astree.h"
 #include <stdio.h>
 
-char	**concat_args(t_ASTNode *node);
+char	**concat_args(t_ASTNode *node, int len);
+int		get_argc(t_ASTNode *node);
 
 void	new_cmd(t_ASTNode *node)
 {
 	node->cmd = (t_cmd *) ft_calloc(1, sizeof(t_cmd));
 	node->cmd->name = node->value;
-	node->cmd->argv = concat_args(node->right);
+	node->cmd->argc = get_argc(node->right);
+	node->cmd->argv = concat_args(node->right, node->cmd->argc);
 }
 
-char	**concat_args(t_ASTNode *node)
+int	get_argc(t_ASTNode *node)
+{
+	size_t	i;
+
+	i = 0;
+	while (node)
+	{
+		node = node->next;
+		i++;
+	}
+	return (i);
+}
+
+char	**concat_args(t_ASTNode *node, int len)
 {
 	char		**result;
 	t_ASTNode	*tmp_node;
-	size_t		len;
-	size_t		i;
+	int			i;
 
 	tmp_node = node;
-	len = 0;
-	while (tmp_node)
-	{
-		tmp_node = tmp_node->next;
-		len++;
-	}
 	result = (char **)ft_calloc(len + 1, sizeof(char *));
 	tmp_node = node;
 	i = 0;

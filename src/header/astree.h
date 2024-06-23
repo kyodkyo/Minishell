@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:41:28 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 15:52:52 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:49:41 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ typedef struct s_ASTNode
 	char				*value;
 	struct s_ASTNode	*left;
 	struct s_ASTNode	*right;
-	struct s_ASTNode	*next;
-	char				*path;
 	t_cmd				*cmd;
+	struct s_ASTNode	*next;
 }	t_ASTNode;
 
 t_ASTNode	*astree(t_token *tokens);

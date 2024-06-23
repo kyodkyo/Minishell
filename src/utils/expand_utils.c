@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:33:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 11:57:51 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/23 21:52:38 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "env_utils.h"
 
 int	is_valid(char *s, int i)
 {

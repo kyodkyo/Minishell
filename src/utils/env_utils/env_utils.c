@@ -6,11 +6,11 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:24:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:23:10 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:50:21 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "env_utils.h"
 
 char	*get_next_key(t_list *env_list, char *prev)
 {

@@ -6,21 +6,21 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:32:46 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:30:01 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:37:00 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
 
-void	pwd(t_io *io_handler)
+void	pwd(void)
 {
 	char	*current;
 
 	current = getcwd(NULL, 0);
 	if (current)
 	{
-		write(io_handler->output_fd, current, ft_strlen(current));
-		write(io_handler->output_fd, "\n", 1);
+		write(STDOUT_FILENO, current, ft_strlen(current));
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	else
 		printf("error\n");

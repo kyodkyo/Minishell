@@ -13,6 +13,10 @@
 		"signal.h": "c",
 		"utils.h": "c",
 		"history.h": "c",
-		"__node_handle": "c"
+		"__node_handle": "c",
+		"unistd.h": "c",
+		"msignal.h": "c",
+		"builtin.h": "c",
+		"env_utils.h": "c"
 	},
 }

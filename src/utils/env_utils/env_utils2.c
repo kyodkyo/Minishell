@@ -6,11 +6,11 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:54:19 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:23:11 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:41:10 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "env_utils.h"
 
 void	free_env_node(t_list **node)
 {

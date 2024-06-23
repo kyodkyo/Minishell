@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 01:29:13 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:42:12 by woonshin         ###   ########.fr       */
+/*   Created: 2024/06/23 21:31:50 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/23 21:48:33 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
+# include "astree.h"
+# include "minishell_t.h"
+# include "env_utils.h"
 
-void	env(t_list *env_list)
-{
-	char	*data;
+int		built_in(t_ASTNode *node, t_list *env_list);
+void	cd(t_ASTNode *node, t_list *env_list);
+void	echo(t_ASTNode *node);
+void	env(t_list *env_list);
+void	built_in_exit(t_ASTNode *node);
+void	export(t_ASTNode *node, t_list *env_list);
+void	pwd();
+void	unset(t_ASTNode *node, t_list *env_list);
 
-	while (env_list)
-	{
-		if (((t_env *)(env_list->content))->value)
-		{
-			data = ((t_env *)(env_list->content))->data;
-			write(STDOUT_FILENO, data, ft_strlen(data));
-			write(STDOUT_FILENO, "\n", 1);
-		}
-		env_list = env_list->next;
-	}
-}
+#endif

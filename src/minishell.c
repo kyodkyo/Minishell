@@ -6,26 +6,16 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 17:59:57 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:53:59 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_io_handler(t_io *io_handler)
-{
-	io_handler->input_fd = STDIN_FILENO;
-	io_handler->output_fd = STDOUT_FILENO;
-	io_handler->next_pipe = 0;
-	io_handler->prev_pipe = 0;
-	io_handler->pipe_read_fd = STDIN_FILENO;
-	io_handler->pipe_write_fd = STDOUT_FILENO;
-}
 
 void	minishell(int argc, char **argv, char **envp)
 {
 	char		*input;
-	t_io		io_handler;
 	t_mini		mini;
 	int			result;
 
@@ -42,10 +32,10 @@ void	minishell(int argc, char **argv, char **envp)
 				free(input);
 				continue ;
 			}
-			// print_ast(mini.astree_root, 0);
-			init_io_handler(&io_handler);
-			set_cmd_path(mini.astree_root, mini.env_list);
-			execute_tree(mini.astree_root, mini.env_list, &io_handler);
+			print_ast(mini.astree_root, 0);
+			// init_io_handler(&io_handler);
+			// set_cmd_path(mini.astree_root, mini.env_list);
+			// execute_tree(mini.astree_root, mini.env_list, &io_handler);
 			free_ast(mini.astree_root);
 		}
 		else

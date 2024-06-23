@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 02:19:23 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:39:19 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:15:52 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "minishell_t.h"
 # include "libft.h"
 # include "parse.h"
+# include "execute.h"
 
 
 int	g_status_code;
@@ -88,8 +89,6 @@ void	export(t_ASTNode *node, t_list *env_list, t_io *io_handler);
 void	pwd(t_io *io_handler);
 void	unset(t_ASTNode *node, t_list *env_list);
 
-void	error(void);
-
 /** env_utils.c */
 char	*get_next_key(t_list *env_list, char *prev);
 t_env	*find_by_key(t_list *env_list, char *target_key);
@@ -114,7 +113,7 @@ int		cmp_str(char *s1, char *s2);
 int		is_valid(char *s, int i);
 int		find_start_pos(char *s);
 int		find_end_pos(char *s, int i);
-char	*get_value(t_list *env_list, char *key);
+char	*get_env_value(t_list *env_list, char *key);
 
 /** expand.c */
 void	change_to_value(char *result, char *front, char *env_value, char *back);

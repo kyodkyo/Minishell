@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:29:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:29:56 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:21:37 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	built_in_exit(t_ASTNode *node)
 	int	exit_code;
 
 	write(2, "exit\n", 5);
-	if (!node->value[1])
+	if (!node->cmd->argv[1])
 		exit(0);
-	exit_code = ft_atoi(&node->value[1]);
-	if (node->value[2])
+	exit_code = ft_atoi(node->cmd->argv[1]);
+	if (node->cmd->argv[2])
 	{
 		write(1, "exit: too many arguments", 24);
 		return ;

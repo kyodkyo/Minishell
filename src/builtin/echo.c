@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:28:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:29:52 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:19:18 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	echo(t_ASTNode *node, t_io *io_handler)
 
 	i = 1;
 	option = 0;
-	if (&node->value[1] && compare_str(&node->value[1], "-n", 2) == 0)
+	if (node->cmd->argv && compare_str(node->cmd->argv[1], "-n", 2) == 0)
 	{
 		i++;
 		option = 1;
 	}
-	while (node->value[i])
+	while (node->cmd->argv[i])
 	{
-		write(io_handler->output_fd, &node->value[i],
-			ft_strlen(&node->value[i]));
-		if (&node->value[i + 1])
+		write(io_handler->output_fd, node->cmd->argv[i],
+			ft_strlen(node->cmd->argv[i]));
+		if (node->cmd->argv[i + 1])
 			write(io_handler->output_fd, " ", 1);
 		i++;
 	}

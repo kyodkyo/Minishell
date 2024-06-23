@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:27:58 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:29:37 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 23:33:16 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ void	sig_shell(int sig)
 
 void	sig_heredoc(int sig)
 {
-	if (sig == HEREDOC)
-	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		printf("\n");
-		exit(1);
-	}
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	printf("\n");
+	exit(1);
 }
 
 void	set_signal(int s_int, int s_quit)

@@ -6,11 +6,12 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:19:17 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 21:58:45 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 23:50:48 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
+#include <stdio.h>
 
 void	skip_delimiters(const char *line, t_token_iter *iter);
 void	process_quotes(const char c, t_token_iter *iter);
@@ -26,11 +27,17 @@ int	tokenize(t_mini *mini, t_token **token_lst, char *line)
 	{
 		skip_delimiters(line, &iter);
 		iter.left = iter.right;
-		while (line[iter.right] && (!is_delimiter(line[iter.right])
-				|| iter.in_single_quote || iter.in_double_quote))
+		if (line[iter.right] == '|')
 		{
-			process_quotes(line[iter.right], &iter);
 			iter.right++;
+		}
+		else{
+			while (line[iter.right] && (!is_delimiter(line[iter.right])
+					|| iter.in_single_quote || iter.in_double_quote) && line[iter.right] != '|')
+			{
+				process_quotes(line[iter.right], &iter);
+				iter.right++;
+			}
 		}
 		process_token(mini, token_lst, line, &iter);
 	}

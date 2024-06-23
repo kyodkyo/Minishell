@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 23:10:07 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 00:05:30 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	redir_in(t_ASTNode *node)
 	fd = open(node->value, O_RDONLY);
 	if (fd < 0)
 		printf("error\n");
-	dup2(STDIN_FILENO, fd);
+	dup2(fd, STDIN_FILENO);
 }
 
 void	redir_out(t_ASTNode *node)
@@ -51,7 +51,7 @@ void	redir_heredoc(t_ASTNode *node)
 	waitpid(pid, &status, 0);
 	set_signal(SHELL, IGNORE);
 	fd = open(file, O_RDONLY, 0644);
-	dup2(STDIN_FILENO, fd);
+	dup2(fd, STDIN_FILENO);
 	free(file);
 }
 
@@ -69,7 +69,7 @@ void	heredoc_child_process(int fd, char *delimiter)
 {
 	char	*line;
 
-	set_signal(DEFAULT, IGNORE);
+	set_signal(HEREDOC, IGNORE);
 	while (1)
 	{
 		line = readline("heredoc> ");

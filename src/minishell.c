@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 23:17:57 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 23:58:31 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ void	minishell(int argc, char **argv, char **envp)
 	char		*input;
 	t_mini		mini;
 	int			result;
+	int			origin_fd[2];
 
 	mini.env_list = init_envp(envp);
 	while (1)
 	{
+		origin_fd[0] = dup(STDIN_FILENO);
+		origin_fd[1] = dup(STDOUT_FILENO);
 		input = readline("minishell> ");
 		if (input)
 		{
@@ -39,6 +42,8 @@ void	minishell(int argc, char **argv, char **envp)
 		}
 		else
 			break ;
+		dup2(origin_fd[0], STDIN_FILENO);
+		dup2(origin_fd[1], STDOUT_FILENO);
 		if (cmp_str(input, ""))
 			add_history(input);
 		free(input);

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:09:03 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 23:25:39 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 23:58:18 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 void execute(t_ASTNode *node, t_list *env_list)
 {
     int pipefd[2];
-	int origin_fd[2];
     pid_t pid;
     int status;
 
     if (node == NULL)
         return;
-	origin_fd[0] = dup(STDIN_FILENO);
-	origin_fd[1] = dup(STDOUT_FILENO);
     if (node->type == T_PIPE)
     {
         if (pipe(pipefd) == -1)
@@ -67,6 +64,4 @@ void execute(t_ASTNode *node, t_list *env_list)
     {
         execute_node(node, env_list);
     }
-	dup2(origin_fd[0], STDIN_FILENO);
-	dup2(origin_fd[1], STDOUT_FILENO);
 }

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:13:23 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 17:26:17 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 23:42:24 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,25 @@ void	heredoc(t_ASTNode *node)
 	heredoc(node->right);
 }
 
+char	*find_infile_num(t_ASTNode *node)
+{
+	int		i;
+	int		find;
+	char	*name;
+
+	i = 0;
+	find = 0;
+	while (!find)
+	{
+		name = ft_strjoin("/tmp/.infile", ft_itoa(i));
+		if (access(name, F_OK) != 0)
+			find = 1;
+		else
+			i++;
+	}
+	return (name);
+}
+
 void	heredoc_core(t_ASTNode *node)
 {
 	int		status;
@@ -34,7 +53,7 @@ void	heredoc_core(t_ASTNode *node)
 	pid_t	pid;
 	int		fd;
 
-	filename = ft_strjoin("/tmp/.infile", ft_itoa(1)); // 이거 변경.
+	filename = find_infile_num(node);
 	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	// if (fd < 0)
 	// 	error

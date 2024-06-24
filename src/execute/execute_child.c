@@ -3,20 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   execute_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:14:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 23:21:13 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:03:33 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
+void	free_double_arr(char **arr)
+{
+	int	i;
+
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
+}
+
+char	**make_execute_env(t_list **env_list)
+{
+	int		i;
+	int		size;
+	t_list	*tmp;
+	char	**result;
+
+	size = ft_lstsize(*env_list);
+	result = ft_calloc(size + 1, sizeof(char *));
+	if (!result)
+		return (NULL);
+	i = 0;
+	tmp = *env_list;
+	while (tmp)
+	{
+		result[i] = ft_strdup(((t_env *)(tmp->content))->data);
+		if (!result[i])
+		{
+			free_double_arr(result);
+			return (NULL);
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (result);
+}
+
 void	execute_user_defined(t_ASTNode *node, t_list *env_list)
 {
-	extern char	**environ;
+	char	**execute_env;
 
-	if (execve(node->cmd->path, node->cmd->argv, environ) == -1)
+	execute_env = make_execute_env(&env_list);
+	if (execve(node->cmd->path, node->cmd->argv, execute_env) == -1)
 		execve_error();
 }
 

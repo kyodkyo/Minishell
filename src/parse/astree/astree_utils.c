@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 22:54:25 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 22:55:52 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:04:23 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,20 @@ t_ASTNode	*create_node(int type, char *value)
 	return (node);
 }
 
-void	add_redirection(t_ASTNode *command_node, t_token **token)
+int	add_redirection(t_ASTNode *command_node, t_token **token)
 {
 	t_ASTNode	*redir_node;
 
+	if ((*token)->next == NULL)
+		return (1);
 	redir_node = create_node((*token)->type, (*token)->next->str);
 	*token = (*token)->next;
 	redir_node->left = command_node->left;
 	command_node->left = redir_node;
+	return (0);
 }
 
-void	add_argument(t_ASTNode *command_node, t_token *token, int *cmd_set)
+int	add_argument(t_ASTNode *command_node, t_token *token, int *cmd_set)
 {
 	t_ASTNode	*arg_node;
 	t_ASTNode	*current_arg;
@@ -59,6 +62,7 @@ void	add_argument(t_ASTNode *command_node, t_token *token, int *cmd_set)
 		command_node->value = token->str;
 		*cmd_set = 1;
 	}
+	return (0);
 }
 
 void	free_ast(t_ASTNode *node)

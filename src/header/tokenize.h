@@ -6,14 +6,14 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:26:42 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 21:47:40 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:23:21 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
-# include "minishell_t.h"
+# include "structure.h"
 # include "token.h"
 
 typedef struct s_tokenize_iter

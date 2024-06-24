@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:19:17 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 23:10:40 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 23:30:24 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	tokenize(t_mini *mini, t_token **token_lst, char *line)
 		}
 		process_token(mini, token_lst, line, &iter);
 	}
+	tokenize_remove_quotes(*token_lst);
 	return (iter.in_single_quote || iter.in_double_quote);
 }
 
@@ -51,7 +52,6 @@ void	skip_delimiters(const char *line, t_token_iter *iter)
 
 int	process_quotes(const char c, t_token_iter *iter)
 {
-	printf("%d %d\n", iter->left, iter->right);
 	if (c == '\'' && !iter->in_double_quote)
 		iter->in_single_quote = !iter->in_single_quote;
 	else if (c == '"' && !iter->in_single_quote)

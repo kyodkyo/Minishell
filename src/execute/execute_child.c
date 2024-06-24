@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:14:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/24 17:03:33 by dakang           ###   ########.fr       */
+/*   Updated: 2024/06/24 17:30:07 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	execute_fork(t_ASTNode *node, t_list *env_list)
 	pid_t	child_pid;
 	int		status;
 
-	set_signal(IGNORE, IGNORE);
 	pid = fork();
 	if (pid == -1)
 		ft_putendl_fd("error pid\n", STDERR_FILENO);
@@ -78,6 +77,7 @@ void	execute_fork(t_ASTNode *node, t_list *env_list)
 	}
 	else
 	{
+		set_signal(IGNORE, IGNORE);
 		child_pid = waitpid(pid, &status, WUNTRACED);
 		set_parent_status(status);
 	}

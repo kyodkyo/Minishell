@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:32:56 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 02:43:53 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 23:13:08 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ t_token	*new_token(char *line, int l, int r)
 	token->type = get_token_type(token->str);
 	if (is_quotation_str(line, l, r))
 	{
+		if (line[l] == '\'')
+			token->type = T_SINGLE_QUOTE;
+		else
+			token->type = T_DOUBLE_QUOTE;
 		tmp = token->str;
 		if (l + 1 == r)
 			token->str = ft_calloc(0, sizeof(char));

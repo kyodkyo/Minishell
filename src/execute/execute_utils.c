@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 00:58:53 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/24 17:28:52 by dakang           ###   ########.fr       */
+/*   Updated: 2024/06/25 01:59:14 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+#include <string.h>
 
 void	execve_error(void)
 {

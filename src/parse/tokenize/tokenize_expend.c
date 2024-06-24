@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:13:12 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/22 21:52:13 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 23:15:05 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token)
 	int		i;
 
 	back = token_lst_back(*token_lst);
-	if (back && back->type == T_REDIR_HERE)
+	if (back && back->type == T_REDIR_HERE || token->type == T_SINGLE_QUOTE)
 		return (0);
 	new_line = expand_env(mini->env_list, token->str);
 	if (ft_strcmp(token->str, new_line) == 0)

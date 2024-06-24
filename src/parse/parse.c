@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:34:07 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 19:26:36 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 23:30:03 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	parse(t_mini *mini, char *input)
 
 	token_lst = NULL;
 	result = tokenize(mini, &token_lst, input);
+	t_token	*tmp = token_lst;
 	if (result != 0)
 		return (result);
 	result = astree(mini, token_lst);

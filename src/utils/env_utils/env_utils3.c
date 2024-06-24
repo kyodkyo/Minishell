@@ -6,11 +6,11 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:30:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 18:01:02 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:41:43 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "env_utils.h"
 
 void	to_lowercase(char *str)
 {

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:30:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 17:22:59 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/23 21:49:20 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
+#include "utils.h"
 
-void	export(t_ASTNode *node, t_list *env_list, t_io *io_handler)
+void	export(t_ASTNode *node, t_list *env_list)
 {
 	int		i;
 	char	*key;
@@ -20,7 +21,7 @@ void	export(t_ASTNode *node, t_list *env_list, t_io *io_handler)
 
 	i = 0;
 	if (!node->cmd->argv[1])
-		export_no_argv(env_list, io_handler);
+		export_no_argv(env_list);
 	while (node->cmd->argv[++i])
 	{
 		key = NULL;

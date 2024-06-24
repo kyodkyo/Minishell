@@ -6,13 +6,13 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:28:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 17:47:28 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:37:00 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
 
-void	echo(t_ASTNode *node, t_io *io_handler)
+void	echo(t_ASTNode *node)
 {
 	int	i;
 	int	option;
@@ -27,12 +27,12 @@ void	echo(t_ASTNode *node, t_io *io_handler)
 	}
 	while (1 < node->cmd->argc && node->cmd->argv[i])
 	{
-		write(io_handler->output_fd, node->cmd->argv[i],
+		write(STDOUT_FILENO, node->cmd->argv[i],
 			ft_strlen(node->cmd->argv[i]));
 		if (node->cmd->argv[i + 1])
-			write(io_handler->output_fd, " ", 1);
+			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
 	if (!option)
-		write(io_handler->output_fd, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
 }

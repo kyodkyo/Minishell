@@ -5,61 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/22 19:50:16 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 18:01:39 by woonshin         ###   ########.fr       */
+/*   Created: 2024/06/23 20:09:03 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/23 23:58:18 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execute.h"
 
-void	check_next_pipe(t_ASTNode *node, t_io *io)
+void execute(t_ASTNode *node, t_list *env_list)
 {
-	int	result;
+    int pipefd[2];
+    pid_t pid;
+    int status;
 
-	if (node->right && node->right->type == T_PIPE)
-	{
-		result = pipe(io->pipe);
-		if (result < 0)
-			printf("error\n");
-		io->pipe_write_fd = io->pipe[1];
-		io->next_pipe = 1;
-	}
-}
+    if (node == NULL)
+        return;
+    if (node->type == T_PIPE)
+    {
+        if (pipe(pipefd) == -1)
+        {
+            perror("pipe");
+            exit(EXIT_FAILURE);
+        }
 
-void	execute_command(t_ASTNode *node, t_list *env_list, t_io *io)
-{
-	if (node->value == NULL)
-		return ;
-	if (built_in(node, env_list, io) == 0)
-		return ;
-	else
-		execute_fork(node, env_list, io);
-}
+        pid = fork();
+        if (pid == -1)
+        {
+            perror("fork");
+            exit(EXIT_FAILURE);
+        }
 
-void	execute_node(t_ASTNode *node, t_list *env_list, t_io *io)
-{
-	if (node->type == T_PIPE)
-		check_next_pipe(node, io);
-	if (node->type == T_CMD)
-		execute_command(node, env_list, io);
-	if (node->type == T_REDIR_IN)
-		redir_in(node, io);
-	if (node->type == T_REDIR_OUT)
-		redir_out(node, io);
-	if (node->type == T_REDIR_HERE)
-		redir_heredoc(node, io);
-	if (node->type == T_REDIR_APPEND)
-		redir_out_append(node, io);
-	if (node->type == T_REDIR_ERR)
-		printf("not yet\n");
-		// redirect_error(node, env_list, io);
-}
+        if (pid == 0)
+        {
+            close(pipefd[0]);
+            if (dup2(pipefd[1], STDOUT_FILENO) == -1)
+            {
+                perror("dup2");
+                exit(EXIT_FAILURE);
+            }
+            close(pipefd[1]);
+            execute(node->left, env_list);
+            exit(EXIT_SUCCESS);
+        } else
+        {
+            close(pipefd[1]);
+            if (dup2(pipefd[0], STDIN_FILENO) == -1)
+            {
+                perror("dup2");
+                exit(EXIT_FAILURE);
+            }
+            close(pipefd[0]);
 
-void	execute_tree(t_ASTNode *node, t_list *env_list, t_io *io)
-{
-	if (node->left)
-		execute_tree(node->left, env_list, io);
-	execute_node(node, env_list, io);
-	if (node->right)
-		execute_tree(node->right, env_list, io);
+            waitpid(pid, &status, 0);
+            execute(node->right, env_list);
+        }
+    }
+    else
+    {
+        execute_node(node, env_list);
+    }
 }

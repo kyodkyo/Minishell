@@ -6,11 +6,11 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 11:40:10 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 17:54:02 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 22:35:54 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execute.h"
 
 void	free_path(char **paths)
 {

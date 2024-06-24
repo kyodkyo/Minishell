@@ -6,69 +6,66 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 18:09:52 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 00:05:30 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execute.h"
 
-void	redir_in(t_ASTNode *node, t_io *io)
+void	heredoc_child_process(int fd, char *delimiter);
+
+void	redir_in(t_ASTNode *node)
 {
 	int	fd;
 
 	fd = open(node->value, O_RDONLY);
 	if (fd < 0)
 		printf("error\n");
-	if (io->input_fd != STDIN_FILENO)
-		close(io->input_fd);
-	io->input_fd = fd;
+	dup2(fd, STDIN_FILENO);
 }
 
-void	redir_out(t_ASTNode *node, t_io *io)
+void	redir_out(t_ASTNode *node)
 {
 	int	fd;
 
 	fd = open(node->value, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
 		printf("error\n");
-	if (io->output_fd != STDOUT_FILENO)
-		close(io->output_fd);
-	io->output_fd = fd;
+	dup2(fd, STDOUT_FILENO);
 }
 
-void	redir_heredoc(t_ASTNode *node, t_io *io)
+void	redir_heredoc(t_ASTNode *node)
 {
 	int		status;
 	char	*file;
 	pid_t	pid;
+	int		fd;
 
 	file = ft_strjoin("/tmp/.infile", ft_itoa(1)); // 이거 변경.
-	io->input_fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	// 음수
 	set_signal(IGNORE, IGNORE);
 	pid = fork();
 	if (pid == 0)
-		heredoc_child_process(node->value, io);
+		heredoc_child_process(fd, node->value);
 	waitpid(pid, &status, 0);
 	set_signal(SHELL, IGNORE);
-	close(io->input_fd);
-	io->input_fd = open(file, O_RDONLY, 0644);
+	fd = open(file, O_RDONLY, 0644);
+	dup2(fd, STDIN_FILENO);
 	free(file);
 }
 
-void	redir_out_append(t_ASTNode *node, t_io *io)
+void	redir_out_append(t_ASTNode *node)
 {
 	int	fd;
 
 	fd = open(node->value, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	// if (fd < 0)
-	// 	error();
-	if (io->output_fd != STDOUT_FILENO)
-		close(io->output_fd);
-	io->output_fd = fd;
+	if (fd < 0)
+		printf("error\n");
+	dup2(fd, STDOUT_FILENO);
 }
 
-void	heredoc_child_process(char *delimiter, t_io *io)
+void	heredoc_child_process(int fd, char *delimiter)
 {
 	char	*line;
 
@@ -80,11 +77,11 @@ void	heredoc_child_process(char *delimiter, t_io *io)
 		{
 			if (!cmp_str(line, delimiter))
 			{
-				g_status_code = 1;
+				g_status_code = 0;
 				break ;
 			}
-			write(io->input_fd, line, ft_strlen(line));
-			write(io->input_fd, "\n", 1);
+			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
 			free(line);
 		}
 		else

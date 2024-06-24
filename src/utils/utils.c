@@ -6,11 +6,11 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:13:46 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 02:22:55 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:50:41 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
 void	*str_join_len(void *dst, const void *src, size_t len)
 {

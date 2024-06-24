@@ -1,9 +1,12 @@
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
+CFLAGS = -I/opt/homebrew/opt/readline/include
+LDFLAGS = -L/opt/homebrew/opt/readline/lib -lreadline
+
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-INCLUDE = -I src/header
+INCLUDE = -I src/header -I $(LIBFT_DIR)
 
 SRC_FILES = $(shell find src -name "*.c")
 OBJ_FILES = $(SRC_FILES:.c=.o)
@@ -13,10 +16,10 @@ TARGET = minishell
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES) $(LIBFT)
-	$(CC) $(LIBFT) $(CFLAGS) $(OBJ_FILES) -o $@ -L $(LIBFT_DIR) $(INCLUDE) -lreadline 
+	$(CC) $(OBJ_FILES) $(LIBFT) $(CFLAGS) $(LDFLAGS) -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDE) -I $(LIBFT_DIR) -c $< -o $@ 
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

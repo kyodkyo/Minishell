@@ -3,10 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:29:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:37:00 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 02:07:13 by dakyo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "builtin.h"
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/06 01:29:26 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/25 01:28:36 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +30,21 @@ void	built_in_exit(t_ASTNode *node)
 {
 	int	exit_code;
 
-	write(2, "exit\n", 5);
+	ft_putendl_fd("exit", 2);
 	if (!node->cmd->argv[1])
-		exit(0);
+		exit(g_status_code);
 	exit_code = ft_atoi(node->cmd->argv[1]);
+	if (ft_strlen(node->cmd->argv[1]) > 3 || exit_code < 0 || 255 < exit_code)
+	{
+		ft_putendl_fd("exit: numeric argument required", 2);
+		exit(255);
+	}
 	if (node->cmd->argv[2])
 	{
-		write(1, "exit: too many arguments", 24);
+		ft_putendl_fd("exit: too many arguments", 2);
+		g_status_code = 1;
 		return ;
 	}
 	else
-	{
-		if (exit_code < 0 || 255 < exit_code)
-		{
-			write(1, "exit: numeric argument required", 30);
-			exit(1);
-		}
 		exit(exit_code);
-	}
 }

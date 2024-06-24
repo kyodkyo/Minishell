@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:02:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/24 00:05:30 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 22:22:29 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,34 @@ void	redir_out(t_ASTNode *node)
 	dup2(fd, STDOUT_FILENO);
 }
 
+char	*find_infile_num(t_ASTNode *node)
+{
+	int		i;
+	int		find;
+	char	*name;
+
+	i = 0;
+	find = 0;
+	while (!find)
+	{
+		name = ft_strjoin("/tmp/.infile", ft_itoa(i));
+		if (access(name, F_OK) != 0)
+			find = 1;
+		else
+			i++;
+	}
+	return (name);
+}
+
 void	redir_heredoc(t_ASTNode *node)
 {
 	int		status;
-	char	*file;
+	char	*filename;
 	pid_t	pid;
 	int		fd;
 
-	file = ft_strjoin("/tmp/.infile", ft_itoa(1)); // 이거 변경.
-	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	filename = find_infile_num(node);
+	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	// 음수
 	set_signal(IGNORE, IGNORE);
 	pid = fork();
@@ -50,9 +69,10 @@ void	redir_heredoc(t_ASTNode *node)
 		heredoc_child_process(fd, node->value);
 	waitpid(pid, &status, 0);
 	set_signal(SHELL, IGNORE);
-	fd = open(file, O_RDONLY, 0644);
+	fd = open(filename, O_RDONLY, 0644);
 	dup2(fd, STDIN_FILENO);
-	free(file);
+	node->value = filename;
+	free(filename);
 }
 
 void	redir_out_append(t_ASTNode *node)

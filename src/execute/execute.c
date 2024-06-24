@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:09:03 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 17:23:46 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 02:37:05 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void execute(t_ASTNode *node, t_list *env_list)
 		waitpid(0, &num, 0);
 		i++;
 	}
-	set_signal(SHELL, IGNORE);
+	set_signal(SHELL, SHELL);
 }
 
 void execute_core(t_ASTNode *node, t_list *env_list)
@@ -72,13 +72,9 @@ void execute_core(t_ASTNode *node, t_list *env_list)
 				exit(EXIT_FAILURE);
 			}
 			close(pipefd[0]);
-
-			// waitpid(pid, &status, 0);
 			execute_core(node->right, env_list);
 		}
 	}
 	else
-	{
 		execute_node(node, env_list);
-	}
 }

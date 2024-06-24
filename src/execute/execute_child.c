@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:14:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/24 20:54:51 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 03:13:46 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	execute_fork(t_ASTNode *node, t_list *env_list)
 	else
 	{
 		set_signal(IGNORE, IGNORE);
-		child_pid = waitpid(pid, &status, WUNTRACED);
+		// child_pid = waitpid(pid, &status, WUNTRACED);
 		set_parent_status(status);
 	}
 }

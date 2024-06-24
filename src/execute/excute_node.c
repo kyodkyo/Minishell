@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 22:11:04 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 23:22:43 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 02:37:13 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	execute_node(t_ASTNode *node, t_list *env_list)
 		redir_out_append(node);
 	if (node->type == T_REDIR_ERR)
 		dup2(STDOUT_FILENO, STDERR_FILENO);
-	
 }
 
 void	execute_command(t_ASTNode *node, t_list *env_list)

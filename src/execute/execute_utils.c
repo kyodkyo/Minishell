@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 00:58:53 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 22:36:47 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:28:52 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,18 @@ void	execve_error(void)
 void	set_parent_status(int status)
 {
 	g_status_code = WEXITSTATUS(status);
-	if (WTERMSIG(status))
+	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGINT)
+		{
 			g_status_code = 130;
+			printf("^C\n");
+		}
 		else if (WTERMSIG(status) == SIGQUIT)
+		{
 			g_status_code = 131;
+			printf("^\\Quit: 3\n");
+		}
 		else
 			g_status_code = 128 + status;
 	}

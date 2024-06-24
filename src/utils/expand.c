@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:22:54 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:53:40 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:47:13 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ char	*make_expand_data(t_list *env_list, char *origin, int start, int end)
 	char	*result;
 
 	key = get_substr(origin, start + 1, end - start);
-	value = get_env_value(env_list, key);
+	if (ft_strcmp(key, "?") == 0)
+		value = ft_itoa(g_status_code);
+	else
+		value = get_env_value(env_list, key);
 	len = ft_strlen(origin) - (end - start + 1) + ft_strlen(value);
 	result = ft_calloc(len + 1, sizeof(char));
 	if (!result)

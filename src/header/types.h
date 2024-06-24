@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 19:05:22 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/15 19:06:43 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 23:11:52 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 # define T_REDIR_HERE 7
 # define T_REDIR_APPEND 8
 # define T_REDIR_ERR 9
+# define T_SINGLE_QUOTE 10
+# define T_DOUBLE_QUOTE 11
 
 #endif

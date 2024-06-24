@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:14:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/25 05:17:17 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 05:34:52 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ void	execute_user_defined(t_ASTNode *node, t_list *env_list)
 
 	execute_env = make_execute_env(&env_list);
 	if (execve(node->cmd->path, node->cmd->argv, execute_env) == -1)
+	{
 		execve_error();
+	}
 }
 
 void	execute_fork(t_ASTNode *node, t_list *env_list)
@@ -78,6 +80,8 @@ void	execute_fork(t_ASTNode *node, t_list *env_list)
 	else
 	{
 		child_pid = waitpid(pid, &status, WUNTRACED);
+		if (status != 0)
+			close(STDIN_FILENO);
 		set_parent_status(status);
 	}
 }

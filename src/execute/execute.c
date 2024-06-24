@@ -9,10 +9,8 @@ void execute(t_ASTNode *node, t_list *env_list)
 	heredoc(node);
 	execute_core(node, env_list);
 	set_signal(IGNORE, IGNORE);
-	// i = 0;
     while (waitpid(-1, &status, 0) > 0)
     {
-		printf("waitpid\n");
     }
 
 	set_signal(SHELL, SHELL);
@@ -63,8 +61,6 @@ void execute_core(t_ASTNode *node, t_list *env_list)
 			}
 			close(pipefd[0]);
 			execute_core(node->right, env_list);
-			while (waitpid(-1, &status, 0) > 0)
-				printf("waitpid\n");
 			waitpid(pid, &status, 0); // 자식 프로세스가 끝날 때까지 기다림
 		}
 	}

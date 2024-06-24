@@ -20,6 +20,7 @@
 		"env_utils.h": "c",
 		"execute.h": "c",
 		"fcntl.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"errno.h": "c"
 	},
 }

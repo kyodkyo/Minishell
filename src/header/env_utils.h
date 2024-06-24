@@ -6,15 +6,15 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 21:39:24 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 21:50:28 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:23:04 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_UTILS_H
 # define ENV_UTILS_H
 # include "libft.h"
-# include "minishell_t.h"
 # include "utils.h"
+# include "struct.h"
 
 // env_utils.c
 char	*get_next_key(t_list *env_list, char *prev);

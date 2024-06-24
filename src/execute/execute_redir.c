@@ -84,29 +84,3 @@ void	redir_out_append(t_ASTNode *node)
 		printf("error\n");
 	dup2(fd, STDOUT_FILENO);
 }
-
-void	heredoc_child_process(int fd, char *delimiter)
-{
-	char	*line;
-
-	set_signal(HEREDOC, IGNORE);
-	while (1)
-	{
-		line = readline("heredoc> ");
-		if (line)
-		{
-			if (!cmp_str(line, delimiter))
-			{
-				g_status_code = 0;
-				break ;
-			}
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-			free(line);
-		}
-		else
-			break ;
-	}
-	free(line);
-	exit(0);
-}

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 02:19:23 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:55:19 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:22:54 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "structure.h"
 # include "astree.h"
-# include "minishell_t.h"
 # include "env_utils.h"
 # include "libft.h"
 # include "parse.h"

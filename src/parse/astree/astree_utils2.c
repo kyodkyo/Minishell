@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   astree_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/15 00:34:07 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 19:26:36 by woonshin         ###   ########.fr       */
+/*   Created: 2024/06/24 16:13:58 by woonshin          #+#    #+#             */
+/*   Updated: 2024/06/24 16:19:33 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include <stdio.h>
+#include "astree.h"
 
-int	parse(t_mini *mini, char *input)
+int	astree_counter(t_ASTNode *node)
 {
-	t_token	*token_lst;
-	int		result;
+	int	count;
 
-	token_lst = NULL;
-	result = tokenize(mini, &token_lst, input);
-	if (result != 0)
-		return (result);
-	result = astree(mini, token_lst);
-	if (result != 0)
-		return (result);
-	return (0);
+	if (node == NULL)
+		return (0);
+	count = 0;
+
+	if (node->type == T_PIPE)
+	{
+		count += 1;
+		count += astree_counter(node->left);
+		count += astree_counter(node->right);
+	}
+	else
+		count += 1;
+	return (count);
 }

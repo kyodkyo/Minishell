@@ -6,14 +6,14 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 21:31:50 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 21:48:33 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:23:21 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 # include "astree.h"
-# include "minishell_t.h"
+# include "structure.h"
 # include "env_utils.h"
 
 int		built_in(t_ASTNode *node, t_list *env_list);

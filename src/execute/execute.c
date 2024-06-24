@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:09:03 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 23:58:18 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:23:46 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,71 @@
 
 void execute(t_ASTNode *node, t_list *env_list)
 {
-    int pipefd[2];
-    pid_t pid;
-    int status;
+	int	i;
+	int	num;
 
-    if (node == NULL)
-        return;
-    if (node->type == T_PIPE)
-    {
-        if (pipe(pipefd) == -1)
-        {
-            perror("pipe");
-            exit(EXIT_FAILURE);
-        }
+	heredoc(node);
+	execute_core(node, env_list);
+	set_signal(IGNORE, IGNORE);
+	i = 0;
+	while (i < astree_counter(node))
+	{
+		waitpid(0, &num, 0);
+		i++;
+	}
+	set_signal(SHELL, IGNORE);
+}
 
-        pid = fork();
-        if (pid == -1)
-        {
-            perror("fork");
-            exit(EXIT_FAILURE);
-        }
+void execute_core(t_ASTNode *node, t_list *env_list)
+{
+	int pipefd[2];
+	pid_t pid;
+	int status;
 
-        if (pid == 0)
-        {
-            close(pipefd[0]);
-            if (dup2(pipefd[1], STDOUT_FILENO) == -1)
-            {
-                perror("dup2");
-                exit(EXIT_FAILURE);
-            }
-            close(pipefd[1]);
-            execute(node->left, env_list);
-            exit(EXIT_SUCCESS);
-        } else
-        {
-            close(pipefd[1]);
-            if (dup2(pipefd[0], STDIN_FILENO) == -1)
-            {
-                perror("dup2");
-                exit(EXIT_FAILURE);
-            }
-            close(pipefd[0]);
+	if (node == NULL)
+		return;
+	if (node->type == T_PIPE)
+	{
+		if (pipe(pipefd) == -1)
+		{
+			perror("pipe");
+			exit(EXIT_FAILURE);
+		}
 
-            waitpid(pid, &status, 0);
-            execute(node->right, env_list);
-        }
-    }
-    else
-    {
-        execute_node(node, env_list);
-    }
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			exit(EXIT_FAILURE);
+		}
+
+		if (pid == 0)
+		{
+			close(pipefd[0]);
+			if (dup2(pipefd[1], STDOUT_FILENO) == -1)
+			{
+				perror("dup2");
+				exit(EXIT_FAILURE);
+			}
+			close(pipefd[1]);
+			execute_core(node->left, env_list);
+			exit(EXIT_SUCCESS);
+		} else
+		{
+			close(pipefd[1]);
+			if (dup2(pipefd[0], STDIN_FILENO) == -1)
+			{
+				perror("dup2");
+				exit(EXIT_FAILURE);
+			}
+			close(pipefd[0]);
+
+			// waitpid(pid, &status, 0);
+			execute_core(node->right, env_list);
+		}
+	}
+	else
+	{
+		execute_node(node, env_list);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:41:28 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/23 16:49:41 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:19:44 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_ASTNode	*create_node(int type, char *value);
 void		add_redirection(t_ASTNode *command_node, t_token **token);
 void		add_argument(t_ASTNode *command_node, t_token *token, int *cmd_set);
 void		free_ast(t_ASTNode *node);
+
+int			astree_counter(t_ASTNode *node);
 
 // cmd
 void	new_cmd(t_ASTNode *node);

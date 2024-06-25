@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:28:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:37:00 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 21:40:19 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	echo(t_ASTNode *node)
 	i = 1;
 	option = 0;
 	if (1 < node->cmd->argc && node->cmd->argv
-		&& compare_str(node->cmd->argv[1], "-n", 2) == 0)
+		&& cmp_str(node->cmd->argv[1], "-n") == 0)
 	{
 		i++;
 		option = 1;

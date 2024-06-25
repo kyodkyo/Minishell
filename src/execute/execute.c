@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:02:40 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/25 21:23:23 by dakang           ###   ########.fr       */
+/*   Updated: 2024/06/25 21:34:11 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,38 +34,44 @@ void	execute_core_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
+void	child_process(t_ASTNode *node)
+{
+	close(node->pipefd[0]);
+	if (dup2(node->pipefd[1], STDOUT_FILENO) == -1)
+		execute_core_error("dup2");
+	close(node->pipefd[1]);
+}
+
+void	parent_process(t_ASTNode *node)
+{
+	close(node->pipefd[1]);
+	if (dup2(node->pipefd[0], STDIN_FILENO) == -1)
+		execute_core_error("dup2");
+	close(node->pipefd[0]);
+}
+
 void	execute_core(t_ASTNode *node, t_list *env_list)
 {
-	int		pipefd[2];
-	pid_t	pid;
-	int		status;
-
 	if (node == NULL)
 		return ;
 	if (node->type == T_PIPE)
 	{
-		if (pipe(pipefd) == -1)
+		if (pipe(node->pipefd) == -1)
 			execute_core_error("pipe");
-		pid = fork();
-		if (pid == -1)
+		node->pid = fork();
+		if (node->pid == -1)
 			execute_core_error("fork");
-		if (pid == 0)
+		if (node->pid == 0)
 		{
-			close(pipefd[0]);
-			if (dup2(pipefd[1], STDOUT_FILENO) == -1)
-				execute_core_error("dup2");
-			close(pipefd[1]);
+			child_process(node);
 			execute_core(node->left, env_list);
 			exit(EXIT_SUCCESS);
 		}
 		else
 		{
-			close(pipefd[1]);
-			if (dup2(pipefd[0], STDIN_FILENO) == -1)
-				execute_core_error("dup2");
-			close(pipefd[0]);
+			parent_process(node);
 			execute_core(node->right, env_list);
-			waitpid(pid, &status, 0);
+			waitpid(node->pid, &node->status, 0);
 		}
 	}
 	else

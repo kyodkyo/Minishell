@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:42:41 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 18:49:17 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/25 20:29:41 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ char	*get_substr(char const *s, unsigned int start, size_t len);
 
 /** error.c */
 void	memory_error(void);
+void	file_open_error(char *value);
 
 #endif

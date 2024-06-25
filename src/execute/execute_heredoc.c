@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:13:23 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 23:42:24 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 20:30:56 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,15 @@ void	heredoc_core(t_ASTNode *node)
 
 	filename = find_infile_num(node);
 	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	// if (fd < 0)
-	// 	error
+	if (fd < 0)
+	{
+		file_open_error(node->value);
+		return ;
+	}
 	set_signal(IGNORE, IGNORE);
 	pid = fork();
-	// if (pid < 0)
-	// 	error
+	if (pid < 0)
+		ft_putendl_fd("pid error", STDERR_FILENO);
 	if (pid == 0)
 		heredoc_child_process(fd, node->value);
 	set_signal(SHELL, IGNORE);

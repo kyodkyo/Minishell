@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:02:40 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/25 20:32:37 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/25 21:23:23 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ void	execute(t_ASTNode *node, t_list *env_list)
 	{
 	}
 	set_signal(SHELL, SHELL);
+	free_ast(node);
+}
+
+void	execute_core_error(char *str)
+{
+	perror(str);
+	exit(EXIT_FAILURE);
 }
 
 void	execute_core(t_ASTNode *node, t_list *env_list)
@@ -38,24 +45,15 @@ void	execute_core(t_ASTNode *node, t_list *env_list)
 	if (node->type == T_PIPE)
 	{
 		if (pipe(pipefd) == -1)
-		{
-			perror("pipe");
-			exit(EXIT_FAILURE);
-		}
+			execute_core_error("pipe");
 		pid = fork();
 		if (pid == -1)
-		{
-			perror("fork");
-			exit(EXIT_FAILURE);
-		}
+			execute_core_error("fork");
 		if (pid == 0)
 		{
 			close(pipefd[0]);
 			if (dup2(pipefd[1], STDOUT_FILENO) == -1)
-			{
-				perror("dup2");
-				exit(EXIT_FAILURE);
-			}
+				execute_core_error("dup2");
 			close(pipefd[1]);
 			execute_core(node->left, env_list);
 			exit(EXIT_SUCCESS);
@@ -64,10 +62,7 @@ void	execute_core(t_ASTNode *node, t_list *env_list)
 		{
 			close(pipefd[1]);
 			if (dup2(pipefd[0], STDIN_FILENO) == -1)
-			{
-				perror("dup2");
-				exit(EXIT_FAILURE);
-			}
+				execute_core_error("dup2");
 			close(pipefd[0]);
 			execute_core(node->right, env_list);
 			waitpid(pid, &status, 0);

@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 20:33:00 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/25 21:06:06 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	cmd_add_history(char *input)
+{
+	if (cmp_str(input, ""))
+		add_history(input);
+}
+
 void	minishell(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_mini		mini;
-	int			result;
 	int			origin_fd[2];
 
 	mini.env_list = init_envp(envp);
@@ -25,28 +30,21 @@ void	minishell(int argc, char **argv, char **envp)
 		origin_fd[0] = dup(STDIN_FILENO);
 		origin_fd[1] = dup(STDOUT_FILENO);
 		input = readline("minishell> ");
-		if (input)
-		{
-			result = parse(&mini, input);
-			if (result != 0)
-			{
-				printf("parse error\n");
-				free(input);
-				continue ;
-			}
-			set_cmd_path(mini.astree_root, mini.env_list);
-			execute(mini.astree_root, mini.env_list);
-			free_ast(mini.astree_root);
-		}
-		else
+		if (!input)
 			break ;
+		if (parse(&mini, input) != 0)
+		{
+			ft_putendl_fd("parsing error", 1);
+			free(input);
+			continue ;
+		}
+		set_cmd_path(mini.astree_root, mini.env_list);
+		execute(mini.astree_root, mini.env_list);
 		dup2(origin_fd[0], STDIN_FILENO);
 		dup2(origin_fd[1], STDOUT_FILENO);
-		if (cmp_str(input, ""))
-			add_history(input);
+		cmd_add_history(input);
 		free(input);
 	}
-	return ;
 }
 
 int	main(int argc, char **argv, char **envp)

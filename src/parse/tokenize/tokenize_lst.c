@@ -6,34 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:32:56 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 18:48:46 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/25 20:38:04 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
-
-void	token_lst_free(t_token **token_lst)
-{
-	t_token	*token;
-	t_token	*n_token;
-
-	token = *token_lst;
-	while (token)
-	{
-		n_token = token->next;
-		token_free(token);
-		token = n_token;
-	}
-	free(*token_lst);
-	*token_lst = NULL;
-}
-
-void	token_free(t_token *token)
-{
-	if (token->str)
-		free(token->str);
-	free(token);
-}
 
 t_token	*token_lst_back(t_token *token_lst)
 {
@@ -57,7 +34,7 @@ void	add_token(t_token **token_lst, t_token *token)
 	back->next = token;
 }
 
-int check_token_type(char c)
+int	check_token_type(char c)
 {
 	if (c == '\'')
 		return (T_SINGLE_QUOTE);

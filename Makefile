@@ -1,5 +1,5 @@
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
+CFLAGS = -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
 CFLAGS = -I/opt/homebrew/opt/readline/include
 LDFLAGS = -L/opt/homebrew/opt/readline/lib -lreadline
 

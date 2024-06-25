@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:26:42 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 18:48:22 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/25 20:41:20 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int		ft_strcmp(const char *s1, char *s2);
 int		get_token_type(const char *str);
 
 int		tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token);
-int		tokenize_remove_quotes(t_token *token_lst);
+void	tokenize_remove_quotes(t_token *token_lst);
 
 #endif

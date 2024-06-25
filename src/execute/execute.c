@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:02:40 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/25 19:46:34 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/25 20:32:37 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	execute(t_ASTNode *node, t_list *env_list)
 	while (waitpid(-1, &status, 0) > 0)
 	{
 	}
-
 	set_signal(SHELL, SHELL);
 }
 
@@ -43,14 +42,12 @@ void	execute_core(t_ASTNode *node, t_list *env_list)
 			perror("pipe");
 			exit(EXIT_FAILURE);
 		}
-
 		pid = fork();
 		if (pid == -1)
 		{
 			perror("fork");
 			exit(EXIT_FAILURE);
 		}
-
 		if (pid == 0)
 		{
 			close(pipefd[0]);

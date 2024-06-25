@@ -6,12 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 18:47:15 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/25 20:33:00 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	minishell(int argc, char **argv, char **envp)
 {

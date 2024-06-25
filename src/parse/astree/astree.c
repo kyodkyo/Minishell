@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   astree.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 07:42:06 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 19:26:17 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 20:34:04 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "astree.h"
 #include <stdio.h>
 
-int parse_pipeline(t_mini *mini, t_token **current_token);
+int	parse_pipeline(t_mini *mini, t_token **current_token);
 int	parse_command(t_ASTNode **node, t_token **current_token);
 
 int	astree(t_mini *mini, t_token *tokens)
@@ -72,41 +72,6 @@ int	parse_pipeline(t_mini *mini, t_token **current_token)
 	}
 	mini->astree_root = left_command;
 	return (0);
-}
-
-void	print_ast(t_ASTNode *node, int level)
-{
-	int	i;
-
-	if (!node)
-		return ;
-	i = 0;
-	while (i++ < level)
-		printf("  ");
-	printf("Type: %d, Value: %s\n", node->type, node->value);
-	if (node->type == T_CMD)
-	{
-		printf("argv: ");
-		for (int j = 0; node->cmd->argv[j]; j++)
-			printf("%s, ", node->cmd->argv[j]);
-		printf("\n");
-		printf("path: %s\n", node->cmd->path);
-	}
-	if (node->left)
-	{
-		printf("Left:\n");
-		print_ast(node->left, level + 1);
-	}
-	if (node->right)
-	{
-		printf("Right:\n");
-		print_ast(node->right, level + 1);
-	}
-	if (node->next)
-	{
-		printf("next:\n");
-		print_ast(node->next, level + 1);
-	}
 }
 
 void	free_tokens(t_token *tokens)

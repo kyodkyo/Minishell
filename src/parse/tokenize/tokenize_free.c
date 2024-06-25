@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   astree_utils2.c                                    :+:      :+:    :+:   */
+/*   tokenize_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 16:13:58 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 20:34:11 by dakyo            ###   ########.fr       */
+/*   Created: 2024/06/25 20:37:39 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/25 20:37:42 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "astree.h"
+#include "tokenize.h"
 
-int	astree_counter(t_ASTNode *node)
+void	token_lst_free(t_token **token_lst)
 {
-	int	count;
+	t_token	*token;
+	t_token	*n_token;
 
-	if (node == NULL)
-		return (0);
-	count = 0;
-	if (node->type == T_PIPE)
+	token = *token_lst;
+	while (token)
 	{
-		count += 1;
-		count += astree_counter(node->left);
-		count += astree_counter(node->right);
+		n_token = token->next;
+		token_free(token);
+		token = n_token;
 	}
-	else
-		count += 1;
-	return (count);
+	free(*token_lst);
+	*token_lst = NULL;
+}
+
+void	token_free(t_token *token)
+{
+	if (token->str)
+		free(token->str);
+	free(token);
 }

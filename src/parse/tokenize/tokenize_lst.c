@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_lst.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:32:56 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 23:13:08 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:34:50 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ void	add_token(t_token **token_lst, t_token *token)
 	back->next = token;
 }
 
+int check_token_type(char c)
+{
+	if (c == '\'')
+		return (T_SINGLE_QUOTE);
+	else
+		return (T_DOUBLE_QUOTE);
+}
+
 t_token	*new_token(char *line, int l, int r)
 {
 	t_token	*token;
@@ -71,10 +79,7 @@ t_token	*new_token(char *line, int l, int r)
 	token->type = get_token_type(token->str);
 	if (is_quotation_str(line, l, r))
 	{
-		if (line[l] == '\'')
-			token->type = T_SINGLE_QUOTE;
-		else
-			token->type = T_DOUBLE_QUOTE;
+		token->type = check_token_type(line[l]);
 		tmp = token->str;
 		if (l + 1 == r)
 			token->str = ft_calloc(0, sizeof(char));

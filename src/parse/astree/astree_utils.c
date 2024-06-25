@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   astree_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 22:54:25 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 19:04:23 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:06:53 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,4 @@ int	add_argument(t_ASTNode *command_node, t_token *token, int *cmd_set)
 		*cmd_set = 1;
 	}
 	return (0);
-}
-
-void	free_ast(t_ASTNode *node)
-{
 }

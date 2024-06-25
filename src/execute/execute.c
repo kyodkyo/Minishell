@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/25 19:02:40 by dakyo             #+#    #+#             */
+/*   Updated: 2024/06/25 19:03:13 by dakyo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "execute.h"
 
-void execute(t_ASTNode *node, t_list *env_list)
+void	execute(t_ASTNode *node, t_list *env_list)
 {
 	int		i;
 	int		status;
@@ -9,21 +21,21 @@ void execute(t_ASTNode *node, t_list *env_list)
 	heredoc(node);
 	execute_core(node, env_list);
 	set_signal(IGNORE, IGNORE);
-    while (waitpid(-1, &status, 0) > 0)
-    {
-    }
+	while (waitpid(-1, &status, 0) > 0)
+	{
+	}
 
 	set_signal(SHELL, SHELL);
 }
 
-void execute_core(t_ASTNode *node, t_list *env_list)
+void	execute_core(t_ASTNode *node, t_list *env_list)
 {
-	int pipefd[2];
-	pid_t pid;
-	int status;
+	int		pipefd[2];
+	pid_t	pid;
+	int		status;
 
 	if (node == NULL)
-		return;
+		return ;
 	if (node->type == T_PIPE)
 	{
 		if (pipe(pipefd) == -1)
@@ -61,7 +73,7 @@ void execute_core(t_ASTNode *node, t_list *env_list)
 			}
 			close(pipefd[0]);
 			execute_core(node->right, env_list);
-			waitpid(pid, &status, 0); // 자식 프로세스가 끝날 때까지 기다림
+			waitpid(pid, &status, 0);
 		}
 	}
 	else

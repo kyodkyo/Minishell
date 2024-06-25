@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:22:54 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/24 17:47:13 by dakang           ###   ########.fr       */
+/*   Updated: 2024/06/25 18:46:13 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*make_expand_data(t_list *env_list, char *origin, int start, int end)
 	len = ft_strlen(origin) - (end - start + 1) + ft_strlen(value);
 	result = ft_calloc(len + 1, sizeof(char));
 	if (!result)
-		printf("error\n");
+		memory_error();
 	change_to_value(result, get_substr(origin, 0, start),
 		value, get_substr(origin, end + 1, ft_strlen(origin)));
 	free(key);

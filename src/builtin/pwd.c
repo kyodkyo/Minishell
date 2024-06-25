@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:32:46 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:37:00 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:58:24 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	pwd(void)
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	else
-		printf("error\n");
+		perror("pwd");
 	free(current);
 }

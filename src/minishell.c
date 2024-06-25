@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:18:10 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 16:29:13 by dakang           ###   ########.fr       */
+/*   Updated: 2024/06/25 18:47:15 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	minishell(int argc, char **argv, char **envp)
 				free(input);
 				continue ;
 			}
-			// print_ast(mini.astree_root, 0);
 			set_cmd_path(mini.astree_root, mini.env_list);
 			execute(mini.astree_root, mini.env_list);
 			free_ast(mini.astree_root);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:30:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:49:20 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:35:41 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	export(t_ASTNode *node, t_list *env_list)
 		value = NULL;
 		export_split_key_value(node->cmd->argv[i], &key, &value);
 		if (is_valid_key(key))
-			printf("error\n");
+			printf("invalid key error\n");
 		else
 			add_env(&env_list, key, value);
 		free(key);

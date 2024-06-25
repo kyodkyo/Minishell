@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:24:15 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:50:21 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:58:57 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	update_env(t_env *env, char *key, char *value)
 		data = combine_str(data, ft_strdup(value));
 	}
 	if (!data)
-		printf("error\n");
+		memory_error();
 	env->data = data;
 	env->key = ft_strdup(key);
 	if (value)
@@ -72,10 +72,10 @@ void	add_new_env(t_list **env_list, char *key, char *value)
 
 	new_env = ft_envnew();
 	if (!new_env)
-		printf("error\n");
+		memory_error();
 	tmp = ft_lstnew(new_env);
 	if (!tmp)
-		printf("error\n");
+		memory_error();
 	update_env(new_env, key, value);
 	ft_lstadd_back(env_list, tmp);
 }

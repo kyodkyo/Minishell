@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:54:19 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:41:10 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:45:34 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ t_list	*init_envp(char **envp)
 	{
 		env = ft_envnew();
 		if (!env)
-			printf("error\n");
+			memory_error();
 		tmp = ft_lstnew(env);
 		if (!tmp)
-			printf("error\n");
+			memory_error();
 		env->data = ft_strdup(*envp);
 		if (!env->data)
-			printf("error\n");
+			memory_error();
 		init_split_key_value(env->data, &(env->key), &(env->value));
 		ft_lstadd_back(&env_list, tmp);
 		envp++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:42:41 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 19:23:21 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:49:17 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define UTILS_H
 # include "structure.h"
 # include "minishell.h"
-
 
 /** expand_utils.c */
 int		is_valid(char *s, int i);
@@ -38,5 +37,8 @@ char	*combine_str(char const *s1, char const *s2);
 int		copy_str_len(char *dst, const char *src, size_t dstsize);
 int		compare_str(const char *s1, const char *s2, size_t n);
 char	*get_substr(char const *s, unsigned int start, size_t len);
+
+/** error.c */
+void	memory_error(void);
 
 #endif

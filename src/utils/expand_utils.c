@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:33:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:52:38 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:46:03 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ char	*get_env_value(t_list *env_list, char *key)
 	else
 		result = ft_strdup(env->value);
 	if (!result)
-		printf("error\n");
+		memory_error();
 	return (result);
 }

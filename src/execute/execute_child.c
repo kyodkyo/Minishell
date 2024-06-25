@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:14:14 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/25 05:34:52 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:37:46 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**make_execute_env(t_list **env_list)
 	size = ft_lstsize(*env_list);
 	result = ft_calloc(size + 1, sizeof(char *));
 	if (!result)
-		return (NULL);
+		memory_error();
 	i = 0;
 	tmp = *env_list;
 	while (tmp)
@@ -41,7 +41,7 @@ char	**make_execute_env(t_list **env_list)
 		if (!result[i])
 		{
 			free_double_arr(result);
-			return (NULL);
+			memory_error();
 		}
 		tmp = tmp->next;
 		i++;

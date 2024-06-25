@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 21:31:50 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 19:23:21 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:32:30 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	echo(t_ASTNode *node);
 void	env(t_list *env_list);
 void	built_in_exit(t_ASTNode *node);
 void	export(t_ASTNode *node, t_list *env_list);
-void	pwd();
+void	pwd(void);
 void	unset(t_ASTNode *node, t_list *env_list);
 
 #endif

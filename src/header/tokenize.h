@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:26:42 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 23:26:57 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:48:22 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "structure.h"
 # include "token.h"
+# include "utils.h"
 
 typedef struct s_tokenize_iter
 {

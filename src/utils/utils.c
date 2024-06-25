@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:13:46 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:50:41 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:47:31 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*combine_str(char const *s1, char const *s2)
 	s2_len = ft_strlen(s2);
 	res = ft_calloc(s1_len + s2_len + 1, sizeof(char));
 	if (res == NULL)
-		return (NULL);
+		memory_error();
 	str_join_len(res, s1, s1_len);
 	copy_str_len(res + s1_len, s2, s2_len + 1);
 	return (res);
@@ -88,7 +88,7 @@ char	*get_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	res = ft_calloc(len + 1, sizeof(char));
 	if (!res)
-		return (NULL);
+		memory_error();
 	copy_str_len(res, &s[start], len + 1);
 	return (res);
 }

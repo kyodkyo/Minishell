@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_lst.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 05:32:56 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 16:34:50 by dakang           ###   ########.fr       */
+/*   Updated: 2024/06/25 18:48:46 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ t_token	*new_token(char *line, int l, int r)
 
 	token = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (token == NULL)
-		exit(1);
+		memory_error();
 	token->str = ft_substr(line, l, r - l);
 	if (token->str == NULL)
-		exit(1);
+		memory_error();
 	token->type = get_token_type(token->str);
 	if (is_quotation_str(line, l, r))
 	{
@@ -86,7 +86,7 @@ t_token	*new_token(char *line, int l, int r)
 		else
 			token->str = ft_substr(line, l + 1, r - l - 2);
 		if (token->str == NULL)
-			exit(1);
+			memory_error();
 		free(tmp);
 	}
 	return (token);

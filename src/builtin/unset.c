@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 01:32:56 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/23 21:48:26 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:36:14 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	unset(t_ASTNode *node, t_list *env_list)
 	{
 		target_key = node->cmd->argv[i];
 		if (is_valid_key(node->cmd->argv[i]))
-			write(1, "unset: invalid key", 18);
+			ft_putendl_fd("unset: invalid key", 1);
 		else
 			unset_env(&env_list, target_key);
 		i++;

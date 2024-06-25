@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:13:23 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 20:30:56 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/25 21:16:39 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	heredoc(t_ASTNode *node)
 	if (node->type == T_REDIR_HERE)
 	{
 		heredoc_core(node);
+		set_signal(SHELL, IGNORE);
 	}
 	heredoc(node->left);
 	heredoc(node->right);
@@ -66,7 +67,6 @@ void	heredoc_core(t_ASTNode *node)
 		ft_putendl_fd("pid error", STDERR_FILENO);
 	if (pid == 0)
 		heredoc_child_process(fd, node->value);
-	set_signal(SHELL, IGNORE);
 	waitpid(pid, &status, 0);
 	node->value = filename;
 }

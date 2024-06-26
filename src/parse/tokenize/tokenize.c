@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:19:17 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 20:38:34 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/26 10:56:20 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	tokenize(t_mini *mini, t_token **token_lst, char *line)
 		{
 			while (line[iter.right] && (!is_delimiter(line[iter.right])
 					|| iter.in_single_quote || iter.in_double_quote)
-				&& line[iter.right] != '|')
+				&& (line[iter.right] != '|'
+					|| iter.in_single_quote || iter.in_double_quote))
 			{
 				if (process_quotes(line[iter.right], &iter) != 0)
 					break ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:34:07 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 20:33:35 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/26 11:29:28 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 
 int	parse(t_mini *mini, char *input)
 {
-	t_token	*tmp;
 	t_token	*token_lst;
 	int		result;
 
 	token_lst = NULL;
 	result = tokenize(mini, &token_lst, input);
-	tmp = token_lst;
 	if (result != 0)
 		return (result);
 	result = astree(mini, token_lst);

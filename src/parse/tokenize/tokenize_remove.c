@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_remove.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 23:19:29 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/25 20:41:12 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/26 11:25:16 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	remove_quotes(t_token *token)
 	new_str = (char *)ft_calloc(length + 1, sizeof(char));
 	while (i < length)
 	{
-		if (token->str[i] != '"' && token->str[i] != '\'')
+		if (((token->type != T_SINGLE_QUOTE && token->type != T_DOUBLE_QUOTE) && (token->str[i] != '\'' || token->str[i] != '\"'))
+			|| ((token->str[i] != '\'' && token->type == T_SINGLE_QUOTE) || (token->str[i] != '"' && token->type == T_DOUBLE_QUOTE)))
 		{
 			new_str[j++] = token->str[i];
 		}

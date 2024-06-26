@@ -6,7 +6,7 @@
 /*   By: woonshin <woonshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 06:13:12 by woonshin          #+#    #+#             */
-/*   Updated: 2024/06/24 23:15:05 by woonshin         ###   ########.fr       */
+/*   Updated: 2024/06/26 11:30:34 by woonshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 #include "tokenize.h"
 #include "utils.h"
 
-/**
- * return 0 -> 변경 없음.
- * return 1 -> 변경 있음.
-*/
+t_token	*expanded_new_token(char *line, int l, int r)
+{
+	t_token	*token;
+	char	*tmp;
+
+	token = (t_token *)ft_calloc(1, sizeof(t_token));
+	if (token == NULL)
+		memory_error();
+	token->str = ft_substr(line, l, r - l);
+	if (token->str == NULL)
+		memory_error();
+	token->type = get_token_type(token->str);
+	return (token);
+}
+
 int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token)
 {
 	t_token	*back;
@@ -39,7 +50,7 @@ int	tokenize_expend(t_mini *mini, t_token **token_lst, t_token *token)
 	i = 0;
 	while (splited[i])
 	{
-		token_tmp = new_token(splited[i], 0, ft_strlen(splited[i]));
+		token_tmp = expanded_new_token(splited[i], 0, ft_strlen(splited[i]));
 		add_token(token_lst, token_tmp);
 		i++;
 	}
